@@ -55,7 +55,9 @@
             this.chkVideoWidthAuto = new System.Windows.Forms.CheckBox();
             this.numVideoOffset = new System.Windows.Forms.NumericUpDown();
             this.lblVideoOffset = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1.SuspendLayout();
+            this.grpConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxPads)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVideoScale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVideoOffset)).BeginInit();
@@ -136,6 +138,7 @@
             // 
             this.grpConfig.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpConfig.Controls.Add(this.flowLayoutPanel1);
             this.grpConfig.Location = new System.Drawing.Point(12, 48);
             this.grpConfig.Name = "grpConfig";
             this.grpConfig.Size = new System.Drawing.Size(360, 103);
@@ -376,6 +379,14 @@
             this.lblVideoOffset.TabIndex = 23;
             this.lblVideoOffset.Text = "Screen position";
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(354, 84);
+            this.flowLayoutPanel1.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -412,6 +423,7 @@
             this.Text = "nincfg.bin editor";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.grpConfig.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numMaxPads)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVideoScale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVideoOffset)).EndInit();
@@ -454,6 +466,7 @@
         private System.Windows.Forms.CheckBox chkVideoWidthAuto;
         private System.Windows.Forms.NumericUpDown numVideoOffset;
         private System.Windows.Forms.Label lblVideoOffset;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
 
