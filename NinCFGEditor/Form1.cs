@@ -17,7 +17,7 @@ namespace NinCFGEditor {
             InitializeComponent();
 
             _data = NIN_CFG.Read(File.ReadAllBytes(@"C:\Users\admin\Desktop\nincfg.bin"));
-
+                
             foreach (object o in Enum.GetValues(typeof(NinCFGFlags))) {
                 NinCFGFlags v = (NinCFGFlags)o;
 
@@ -35,6 +35,33 @@ namespace NinCFGEditor {
                     AutoSize = true,
                     Checked = _data.Flags.HasFlag(v)
                 });
+            }
+
+            foreach (object o in Enum.GetValues(typeof(NinCFGVideoMode))) {
+                ddlVideoMode.Items.Add(o);
+                if ((NinCFGVideoMode)o == _data.VideoMode) {
+                    ddlVideoMode.SelectedIndex = ddlVideoMode.Items.Count - 1;
+                }
+            }
+            if (ddlVideoMode.SelectedIndex == -1) {
+                ddlVideoMode.Items.Add(_data.VideoMode);
+                ddlVideoMode.SelectedIndex = ddlVideoMode.Items.Count - 1;
+            }
+
+            foreach (object o in Enum.GetValues(typeof(NinCFGForceVideoMode))) {
+                ddlForceVideoMode.Items.Add(o);
+                if ((NinCFGForceVideoMode)o == _data.ForceVideoMode) {
+                    ddlForceVideoMode.SelectedIndex = ddlForceVideoMode.Items.Count - 1;
+                }
+            }
+
+            chkPatchPAL50.Checked = _data.PatchPAL50;
+
+            foreach (object o in Enum.GetValues(typeof(NinCFGLanguage))) {
+                ddlLanguage.Items.Add(o);
+                if ((NinCFGLanguage)o == _data.Language) {
+                    ddlLanguage.SelectedIndex = ddlLanguage.Items.Count - 1;
+                }
             }
         }
     }

@@ -30,14 +30,13 @@
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblVersion1 = new System.Windows.Forms.Label();
-            this.lblVersion2 = new System.Windows.Forms.Label();
             this.grpConfig = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.ddlVideoMode = new System.Windows.Forms.ComboBox();
+            this.ddlForceVideoMode = new System.Windows.Forms.ComboBox();
             this.lblVideoMode = new System.Windows.Forms.Label();
             this.lblLanguage = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.ddlLanguage = new System.Windows.Forms.ComboBox();
             this.lblGamePath = new System.Windows.Forms.Label();
             this.txtGamePath = new System.Windows.Forms.TextBox();
             this.btnGamePathBrowse = new System.Windows.Forms.Button();
@@ -55,7 +54,7 @@
             this.chkVideoWidthAuto = new System.Windows.Forms.CheckBox();
             this.numVideoOffset = new System.Windows.Forms.NumericUpDown();
             this.lblVideoOffset = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.chkPatchPAL50 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.grpConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxPads)).BeginInit();
@@ -115,86 +114,75 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
-            // lblVersion1
-            // 
-            this.lblVersion1.AutoSize = true;
-            this.lblVersion1.Location = new System.Drawing.Point(12, 28);
-            this.lblVersion1.Name = "lblVersion1";
-            this.lblVersion1.Size = new System.Drawing.Size(42, 13);
-            this.lblVersion1.TabIndex = 1;
-            this.lblVersion1.Text = "Version";
-            // 
-            // lblVersion2
-            // 
-            this.lblVersion2.AutoSize = true;
-            this.lblVersion2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersion2.Location = new System.Drawing.Point(60, 28);
-            this.lblVersion2.Name = "lblVersion2";
-            this.lblVersion2.Size = new System.Drawing.Size(14, 13);
-            this.lblVersion2.TabIndex = 2;
-            this.lblVersion2.Text = "0";
-            // 
             // grpConfig
             // 
             this.grpConfig.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grpConfig.Controls.Add(this.flowLayoutPanel1);
-            this.grpConfig.Location = new System.Drawing.Point(12, 48);
+            this.grpConfig.Location = new System.Drawing.Point(12, 27);
             this.grpConfig.Name = "grpConfig";
             this.grpConfig.Size = new System.Drawing.Size(360, 103);
-            this.grpConfig.TabIndex = 3;
+            this.grpConfig.TabIndex = 0;
             this.grpConfig.TabStop = false;
             this.grpConfig.Text = "Configuration Options";
             // 
-            // comboBox1
+            // flowLayoutPanel1
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(82, 157);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
-            this.comboBox1.TabIndex = 0;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(354, 84);
+            this.flowLayoutPanel1.TabIndex = 0;
             // 
-            // comboBox2
+            // ddlVideoMode
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(188, 157);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(80, 21);
-            this.comboBox2.TabIndex = 1;
+            this.ddlVideoMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlVideoMode.FormattingEnabled = true;
+            this.ddlVideoMode.Location = new System.Drawing.Point(82, 136);
+            this.ddlVideoMode.Name = "ddlVideoMode";
+            this.ddlVideoMode.Size = new System.Drawing.Size(100, 21);
+            this.ddlVideoMode.TabIndex = 2;
+            // 
+            // ddlForceVideoMode
+            // 
+            this.ddlForceVideoMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlForceVideoMode.FormattingEnabled = true;
+            this.ddlForceVideoMode.Location = new System.Drawing.Point(188, 136);
+            this.ddlForceVideoMode.Name = "ddlForceVideoMode";
+            this.ddlForceVideoMode.Size = new System.Drawing.Size(80, 21);
+            this.ddlForceVideoMode.TabIndex = 3;
             // 
             // lblVideoMode
             // 
             this.lblVideoMode.AutoSize = true;
-            this.lblVideoMode.Location = new System.Drawing.Point(12, 160);
+            this.lblVideoMode.Location = new System.Drawing.Point(12, 139);
             this.lblVideoMode.Name = "lblVideoMode";
             this.lblVideoMode.Size = new System.Drawing.Size(64, 13);
-            this.lblVideoMode.TabIndex = 5;
+            this.lblVideoMode.TabIndex = 1;
             this.lblVideoMode.Text = "Video Mode";
             // 
             // lblLanguage
             // 
             this.lblLanguage.AutoSize = true;
-            this.lblLanguage.Location = new System.Drawing.Point(12, 187);
+            this.lblLanguage.Location = new System.Drawing.Point(12, 166);
             this.lblLanguage.Name = "lblLanguage";
             this.lblLanguage.Size = new System.Drawing.Size(55, 13);
-            this.lblLanguage.TabIndex = 6;
+            this.lblLanguage.TabIndex = 5;
             this.lblLanguage.Text = "Language";
             // 
-            // comboBox3
+            // ddlLanguage
             // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(82, 184);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(100, 21);
-            this.comboBox3.TabIndex = 7;
+            this.ddlLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlLanguage.FormattingEnabled = true;
+            this.ddlLanguage.Location = new System.Drawing.Point(82, 163);
+            this.ddlLanguage.Name = "ddlLanguage";
+            this.ddlLanguage.Size = new System.Drawing.Size(100, 21);
+            this.ddlLanguage.TabIndex = 6;
             // 
             // lblGamePath
             // 
             this.lblGamePath.AutoSize = true;
-            this.lblGamePath.Location = new System.Drawing.Point(12, 214);
+            this.lblGamePath.Location = new System.Drawing.Point(12, 193);
             this.lblGamePath.Name = "lblGamePath";
             this.lblGamePath.Size = new System.Drawing.Size(60, 13);
             this.lblGamePath.TabIndex = 8;
@@ -204,7 +192,7 @@
             // 
             this.txtGamePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtGamePath.Location = new System.Drawing.Point(82, 211);
+            this.txtGamePath.Location = new System.Drawing.Point(82, 190);
             this.txtGamePath.Name = "txtGamePath";
             this.txtGamePath.Size = new System.Drawing.Size(260, 20);
             this.txtGamePath.TabIndex = 9;
@@ -212,7 +200,7 @@
             // btnGamePathBrowse
             // 
             this.btnGamePathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGamePathBrowse.Location = new System.Drawing.Point(348, 211);
+            this.btnGamePathBrowse.Location = new System.Drawing.Point(348, 190);
             this.btnGamePathBrowse.Name = "btnGamePathBrowse";
             this.btnGamePathBrowse.Size = new System.Drawing.Size(24, 20);
             this.btnGamePathBrowse.TabIndex = 10;
@@ -222,7 +210,7 @@
             // btnCheatPathBrowse
             // 
             this.btnCheatPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheatPathBrowse.Location = new System.Drawing.Point(348, 237);
+            this.btnCheatPathBrowse.Location = new System.Drawing.Point(348, 216);
             this.btnCheatPathBrowse.Name = "btnCheatPathBrowse";
             this.btnCheatPathBrowse.Size = new System.Drawing.Size(24, 20);
             this.btnCheatPathBrowse.TabIndex = 13;
@@ -233,7 +221,7 @@
             // 
             this.txtCheatPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCheatPath.Location = new System.Drawing.Point(82, 237);
+            this.txtCheatPath.Location = new System.Drawing.Point(82, 216);
             this.txtCheatPath.Name = "txtCheatPath";
             this.txtCheatPath.Size = new System.Drawing.Size(260, 20);
             this.txtCheatPath.TabIndex = 12;
@@ -241,7 +229,7 @@
             // lblCheatPath
             // 
             this.lblCheatPath.AutoSize = true;
-            this.lblCheatPath.Location = new System.Drawing.Point(12, 240);
+            this.lblCheatPath.Location = new System.Drawing.Point(12, 219);
             this.lblCheatPath.Name = "lblCheatPath";
             this.lblCheatPath.Size = new System.Drawing.Size(60, 13);
             this.lblCheatPath.TabIndex = 11;
@@ -250,7 +238,7 @@
             // lblMaxPads
             // 
             this.lblMaxPads.AutoSize = true;
-            this.lblMaxPads.Location = new System.Drawing.Point(12, 265);
+            this.lblMaxPads.Location = new System.Drawing.Point(12, 244);
             this.lblMaxPads.Name = "lblMaxPads";
             this.lblMaxPads.Size = new System.Drawing.Size(233, 13);
             this.lblMaxPads.TabIndex = 14;
@@ -258,7 +246,7 @@
             // 
             // numMaxPads
             // 
-            this.numMaxPads.Location = new System.Drawing.Point(322, 263);
+            this.numMaxPads.Location = new System.Drawing.Point(322, 242);
             this.numMaxPads.Maximum = new decimal(new int[] {
             4,
             0,
@@ -270,7 +258,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(120, 289);
+            this.textBox1.Location = new System.Drawing.Point(120, 268);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(62, 20);
             this.textBox1.TabIndex = 17;
@@ -278,7 +266,7 @@
             // lblGameID
             // 
             this.lblGameID.AutoSize = true;
-            this.lblGameID.Location = new System.Drawing.Point(12, 292);
+            this.lblGameID.Location = new System.Drawing.Point(12, 271);
             this.lblGameID.Name = "lblGameID";
             this.lblGameID.Size = new System.Drawing.Size(49, 13);
             this.lblGameID.TabIndex = 16;
@@ -287,7 +275,7 @@
             // lblMemCardBlocks
             // 
             this.lblMemCardBlocks.AutoSize = true;
-            this.lblMemCardBlocks.Location = new System.Drawing.Point(12, 318);
+            this.lblMemCardBlocks.Location = new System.Drawing.Point(12, 297);
             this.lblMemCardBlocks.Name = "lblMemCardBlocks";
             this.lblMemCardBlocks.Size = new System.Drawing.Size(102, 13);
             this.lblMemCardBlocks.TabIndex = 18;
@@ -297,7 +285,7 @@
             // 
             this.ddlMemCardBlocks.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlMemCardBlocks.FormattingEnabled = true;
-            this.ddlMemCardBlocks.Location = new System.Drawing.Point(120, 315);
+            this.ddlMemCardBlocks.Location = new System.Drawing.Point(120, 294);
             this.ddlMemCardBlocks.Name = "ddlMemCardBlocks";
             this.ddlMemCardBlocks.Size = new System.Drawing.Size(62, 21);
             this.ddlMemCardBlocks.TabIndex = 19;
@@ -305,7 +293,7 @@
             // lblVideoScale
             // 
             this.lblVideoScale.AutoSize = true;
-            this.lblVideoScale.Location = new System.Drawing.Point(12, 344);
+            this.lblVideoScale.Location = new System.Drawing.Point(12, 323);
             this.lblVideoScale.Name = "lblVideoScale";
             this.lblVideoScale.Size = new System.Drawing.Size(62, 13);
             this.lblVideoScale.TabIndex = 20;
@@ -318,7 +306,7 @@
             0,
             0,
             0});
-            this.numVideoScale.Location = new System.Drawing.Point(120, 342);
+            this.numVideoScale.Location = new System.Drawing.Point(120, 321);
             this.numVideoScale.Maximum = new decimal(new int[] {
             720,
             0,
@@ -341,7 +329,7 @@
             // chkVideoWidthAuto
             // 
             this.chkVideoWidthAuto.AutoSize = true;
-            this.chkVideoWidthAuto.Location = new System.Drawing.Point(188, 343);
+            this.chkVideoWidthAuto.Location = new System.Drawing.Point(188, 322);
             this.chkVideoWidthAuto.Name = "chkVideoWidthAuto";
             this.chkVideoWidthAuto.Size = new System.Drawing.Size(48, 17);
             this.chkVideoWidthAuto.TabIndex = 22;
@@ -350,7 +338,7 @@
             // 
             // numVideoOffset
             // 
-            this.numVideoOffset.Location = new System.Drawing.Point(120, 368);
+            this.numVideoOffset.Location = new System.Drawing.Point(120, 347);
             this.numVideoOffset.Maximum = new decimal(new int[] {
             20,
             0,
@@ -373,25 +361,28 @@
             // lblVideoOffset
             // 
             this.lblVideoOffset.AutoSize = true;
-            this.lblVideoOffset.Location = new System.Drawing.Point(12, 370);
+            this.lblVideoOffset.Location = new System.Drawing.Point(12, 349);
             this.lblVideoOffset.Name = "lblVideoOffset";
             this.lblVideoOffset.Size = new System.Drawing.Size(80, 13);
             this.lblVideoOffset.TabIndex = 23;
             this.lblVideoOffset.Text = "Screen position";
             // 
-            // flowLayoutPanel1
+            // chkPatchPAL50
             // 
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(354, 84);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.chkPatchPAL50.AutoSize = true;
+            this.chkPatchPAL50.Location = new System.Drawing.Point(274, 138);
+            this.chkPatchPAL50.Name = "chkPatchPAL50";
+            this.chkPatchPAL50.Size = new System.Drawing.Size(89, 17);
+            this.chkPatchPAL50.TabIndex = 4;
+            this.chkPatchPAL50.Text = "Patch PAL50";
+            this.chkPatchPAL50.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 431);
+            this.Controls.Add(this.chkPatchPAL50);
             this.Controls.Add(this.numVideoOffset);
             this.Controls.Add(this.lblVideoOffset);
             this.Controls.Add(this.chkVideoWidthAuto);
@@ -409,14 +400,12 @@
             this.Controls.Add(this.btnGamePathBrowse);
             this.Controls.Add(this.txtGamePath);
             this.Controls.Add(this.lblGamePath);
-            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.ddlLanguage);
             this.Controls.Add(this.lblLanguage);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.ddlForceVideoMode);
             this.Controls.Add(this.lblVideoMode);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.ddlVideoMode);
             this.Controls.Add(this.grpConfig);
-            this.Controls.Add(this.lblVersion2);
-            this.Controls.Add(this.lblVersion1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -441,14 +430,12 @@
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.Label lblVersion1;
-        private System.Windows.Forms.Label lblVersion2;
         private System.Windows.Forms.GroupBox grpConfig;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox ddlVideoMode;
+        private System.Windows.Forms.ComboBox ddlForceVideoMode;
         private System.Windows.Forms.Label lblVideoMode;
         private System.Windows.Forms.Label lblLanguage;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox ddlLanguage;
         private System.Windows.Forms.Label lblGamePath;
         private System.Windows.Forms.TextBox txtGamePath;
         private System.Windows.Forms.Button btnGamePathBrowse;
@@ -467,6 +454,7 @@
         private System.Windows.Forms.NumericUpDown numVideoOffset;
         private System.Windows.Forms.Label lblVideoOffset;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.CheckBox chkPatchPAL50;
     }
 }
 

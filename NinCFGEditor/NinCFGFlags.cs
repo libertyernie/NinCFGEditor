@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NinCFGEditor {
+    [Flags]
     public enum NinCFGFlags : uint {
         Cheats = 1 << 0,
         Debugger = 1 << 1,

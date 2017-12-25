@@ -54,6 +54,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="NinCFGFlags.cs" />
+    <Compile Include="NinCFGLanguage.cs" />
+    <Compile Include="NinCFGVideoMode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
