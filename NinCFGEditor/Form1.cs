@@ -59,6 +59,7 @@ namespace NinCFGEditor {
                 pair.Value.Checked = _workingData.Flags.HasFlag(pair.Key);
             }
 
+            ddlVideoMode.Items.Clear();
             foreach (object o in Enum.GetValues(typeof(NinCFGVideoModeHigh))) {
                 ddlVideoMode.Items.Add(o);
                 if ((NinCFGVideoModeHigh)o == _workingData.VideoModeHigh) {
@@ -70,9 +71,15 @@ namespace NinCFGEditor {
                 ddlVideoMode.SelectedIndex = ddlVideoMode.Items.Count - 1;
             }
 
-            foreach (object o in Enum.GetValues(typeof(NinCFGVideoModeLow))) {
+            ddlForceVideoMode.Items.Clear();
+            foreach (NinCFGVideoModeLow o in new[] {
+                NinCFGVideoModeLow.PAL50,
+                NinCFGVideoModeLow.PAL60,
+                NinCFGVideoModeLow.NTSC,
+                NinCFGVideoModeLow.MPAL
+            }) {
                 ddlForceVideoMode.Items.Add(o);
-                if ((NinCFGVideoModeLow)o == _workingData.ForcedVideoMode) {
+                if (o == _workingData.ForcedVideoMode) {
                     ddlForceVideoMode.SelectedIndex = ddlForceVideoMode.Items.Count - 1;
                 }
             }
@@ -83,6 +90,7 @@ namespace NinCFGEditor {
 
             chkPatchPAL50.Checked = _workingData.PatchPAL50;
 
+            ddlLanguage.Items.Clear();
             foreach (object o in Enum.GetValues(typeof(NinCFGLanguage))) {
                 ddlLanguage.Items.Add(o);
                 if ((NinCFGLanguage)o == _workingData.Language) {
@@ -123,6 +131,31 @@ namespace NinCFGEditor {
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
             Close();
+        }
+
+        private void ddlVideoMode_SelectedIndexChanged(object sender, EventArgs e) {
+            _workingData.VideoModeHigh = (NinCFGVideoModeHigh)ddlVideoMode.SelectedItem;
+            UpdateHexBox();
+        }
+
+        private void ddlForceVideoMode_SelectedIndexChanged(object sender, EventArgs e) {
+            _workingData.ForcedVideoMode = (NinCFGVideoModeLow)ddlForceVideoMode.SelectedItem;
+            UpdateHexBox();
+        }
+
+        private void chkPatchPAL50_CheckedChanged(object sender, EventArgs e) {
+            _workingData.PatchPAL50 = chkPatchPAL50.Checked;
+            UpdateHexBox();
+        }
+
+        private void ddlLanguage_SelectedIndexChanged(object sender, EventArgs e) {
+            _workingData.Language = (NinCFGLanguage)ddlLanguage.SelectedItem;
+            UpdateHexBox();
+        }
+
+        private void txtGamePath_TextChanged(object sender, EventArgs e) {
+            _workingData.GamePath = txtGamePath.Text;
+            UpdateHexBox();
         }
     }
 }

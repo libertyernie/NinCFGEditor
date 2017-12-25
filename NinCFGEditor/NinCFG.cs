@@ -134,6 +134,9 @@ namespace NinCFGEditor
                 }
             }
             set {
+                if (value.Length > 255) {
+                    throw new ArgumentException("Game path cannot exceed 255 characters.");
+                }
                 if (value.Any(c => c >= 256 || c < 0)) {
                     throw new ArgumentException("Only ASCII strings are supported in the game path.");
                 }

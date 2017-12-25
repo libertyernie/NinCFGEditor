@@ -141,6 +141,7 @@
             this.ddlVideoMode.Name = "ddlVideoMode";
             this.ddlVideoMode.Size = new System.Drawing.Size(100, 21);
             this.ddlVideoMode.TabIndex = 2;
+            this.ddlVideoMode.SelectedIndexChanged += new System.EventHandler(this.ddlVideoMode_SelectedIndexChanged);
             // 
             // ddlForceVideoMode
             // 
@@ -150,6 +151,7 @@
             this.ddlForceVideoMode.Name = "ddlForceVideoMode";
             this.ddlForceVideoMode.Size = new System.Drawing.Size(80, 21);
             this.ddlForceVideoMode.TabIndex = 3;
+            this.ddlForceVideoMode.SelectedIndexChanged += new System.EventHandler(this.ddlForceVideoMode_SelectedIndexChanged);
             // 
             // lblVideoMode
             // 
@@ -177,6 +179,7 @@
             this.ddlLanguage.Name = "ddlLanguage";
             this.ddlLanguage.Size = new System.Drawing.Size(100, 21);
             this.ddlLanguage.TabIndex = 6;
+            this.ddlLanguage.SelectedIndexChanged += new System.EventHandler(this.ddlLanguage_SelectedIndexChanged);
             // 
             // lblGamePath
             // 
@@ -195,6 +198,7 @@
             this.txtGamePath.Name = "txtGamePath";
             this.txtGamePath.Size = new System.Drawing.Size(260, 20);
             this.txtGamePath.TabIndex = 9;
+            this.txtGamePath.TextChanged += new System.EventHandler(this.txtGamePath_TextChanged);
             // 
             // btnGamePathBrowse
             // 
@@ -383,6 +387,7 @@
             this.chkPatchPAL50.TabIndex = 4;
             this.chkPatchPAL50.Text = "Patch PAL50";
             this.chkPatchPAL50.UseVisualStyleBackColor = true;
+            this.chkPatchPAL50.CheckedChanged += new System.EventHandler(this.chkPatchPAL50_CheckedChanged);
             // 
             // hexBox1
             // 
