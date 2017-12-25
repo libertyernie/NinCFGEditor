@@ -62,64 +62,59 @@ namespace NinCFGEditor
             }
         }
 
-		public NinCFGVideoMode VideoMode {
+		public NinCFGVideoModeHigh VideoModeHigh {
 			get {
-                return (NinCFGVideoMode)(ushort)_videoMode1;
+                return (NinCFGVideoModeHigh)(ushort)_videoMode1;
             }
             set {
                 _videoMode1 = (ushort)value;
             }
         }
 
-        private static ushort NIN_VID_FORCE_MASK =
-            (ushort)(NinCFGForceVideoMode.PAL50
-                | NinCFGForceVideoMode.PAL60
-                | NinCFGForceVideoMode.NTSC
-                | NinCFGForceVideoMode.MPAL);
-
-        public NinCFGForceVideoMode ForceVideoMode {
+        private NinCFGVideoModeLow VideoModeLow {
             get {
-                return (NinCFGForceVideoMode)(this._videoMode2 & NIN_VID_FORCE_MASK);
+                return (NinCFGVideoModeLow)(ushort)_videoMode2;
             }
             set {
-                ushort v = this._videoMode2;
-				v &= (ushort)~NIN_VID_FORCE_MASK;
-                v |= (ushort)value;
-                this._videoMode2 = v;
+                _videoMode2 = (ushort)value;
             }
         }
 
-        private static ushort NIN_VID_PROG = 1 << 5;
+        public NinCFGVideoModeLow ForcedVideoMode {
+            get {
+                return VideoModeLow & ~NinCFGVideoModeLow.Progressive & ~NinCFGVideoModeLow.PatchPAL50;
+            }
+            set {
+                var v = value;
+                if (ProgressiveScan) v |= NinCFGVideoModeLow.Progressive;
+                if (PatchPAL50) v |= NinCFGVideoModeLow.PatchPAL50;
+                _videoMode2 = (ushort)v;
+            }
+        }
 
         public bool ProgressiveScan {
 			get {
-                return (this._videoMode2 & NIN_VID_PROG) != 0;
+                return VideoModeLow.HasFlag(NinCFGVideoModeLow.Progressive);
             }
             set {
-                int v = this._videoMode2;
                 if (value) {
-                    v |= NIN_VID_PROG;
+                    VideoModeLow |= NinCFGVideoModeLow.Progressive;
                 } else {
-                    v &= ~NIN_VID_PROG;
+                    VideoModeLow &= ~NinCFGVideoModeLow.Progressive;
                 }
-                this._videoMode2 = (ushort)v;
             }
         }
 
-        private static ushort NIN_VID_PATCH_PAL50 = 1 << 6;
-
         public bool PatchPAL50 {
             get {
-                return (this._videoMode2 & NIN_VID_PATCH_PAL50) != 0;
+                return VideoModeLow.HasFlag(NinCFGVideoModeLow.PatchPAL50);
             }
 			set {
-                int v = this._videoMode2;
                 if (value) {
-                    v |= NIN_VID_PATCH_PAL50;
+                    VideoModeLow |= NinCFGVideoModeLow.PatchPAL50;
                 } else {
-                    v &= ~NIN_VID_PATCH_PAL50;
+                    VideoModeLow &= ~NinCFGVideoModeLow.PatchPAL50;
                 }
-                this._videoMode2 = (ushort)v;
             }
         }
 

@@ -5,17 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace NinCFGEditor {
-    public enum NinCFGVideoMode {
+    public enum NinCFGVideoModeHigh {
         Auto = 0,
         Force = 1,
         None = 2,
         ForceDeflicker = 3
     }
     
-    public enum NinCFGForceVideoMode {
+    [Flags]
+    public enum NinCFGVideoModeLow {
         PAL50 = 1 << 0,
         PAL60 = 1 << 1,
         NTSC = 1 << 2,
-        MPAL = 1 << 3
+        MPAL = 1 << 3,
+        ProgressiveScan = 1 << 4,
+        PatchPAL50 = 1 << 5
     }
 }

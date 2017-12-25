@@ -56,22 +56,26 @@ namespace NinCFGEditor {
                 pair.Value.Checked = _workingData.Flags.HasFlag(pair.Key);
             }
 
-            foreach (object o in Enum.GetValues(typeof(NinCFGVideoMode))) {
+            foreach (object o in Enum.GetValues(typeof(NinCFGVideoModeHigh))) {
                 ddlVideoMode.Items.Add(o);
-                if ((NinCFGVideoMode)o == _workingData.VideoMode) {
+                if ((NinCFGVideoModeHigh)o == _workingData.VideoModeHigh) {
                     ddlVideoMode.SelectedIndex = ddlVideoMode.Items.Count - 1;
                 }
             }
             if (ddlVideoMode.SelectedIndex == -1) {
-                ddlVideoMode.Items.Add(_workingData.VideoMode);
+                ddlVideoMode.Items.Add(_workingData.VideoModeHigh);
                 ddlVideoMode.SelectedIndex = ddlVideoMode.Items.Count - 1;
             }
 
-            foreach (object o in Enum.GetValues(typeof(NinCFGForceVideoMode))) {
+            foreach (object o in Enum.GetValues(typeof(NinCFGVideoModeLow))) {
                 ddlForceVideoMode.Items.Add(o);
-                if ((NinCFGForceVideoMode)o == _workingData.ForceVideoMode) {
+                if ((NinCFGVideoModeLow)o == _workingData.ForcedVideoMode) {
                     ddlForceVideoMode.SelectedIndex = ddlForceVideoMode.Items.Count - 1;
                 }
+            }
+            if (ddlForceVideoMode.SelectedIndex == -1) {
+                ddlForceVideoMode.Items.Add(_workingData.ForcedVideoMode);
+                ddlForceVideoMode.SelectedIndex = ddlForceVideoMode.Items.Count - 1;
             }
 
             chkPatchPAL50.Checked = _workingData.PatchPAL50;
