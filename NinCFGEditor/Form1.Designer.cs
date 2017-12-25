@@ -54,6 +54,7 @@
             this.numVideoOffset = new System.Windows.Forms.NumericUpDown();
             this.lblVideoOffset = new System.Windows.Forms.Label();
             this.chkPatchPAL50 = new System.Windows.Forms.CheckBox();
+            this.hexBox1 = new Be.Windows.Forms.HexBox();
             this.menuStrip1.SuspendLayout();
             this.grpConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxPads)).BeginInit();
@@ -67,7 +68,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(384, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(774, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -85,28 +86,28 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -245,6 +246,7 @@
             // 
             // numMaxPads
             // 
+            this.numMaxPads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.numMaxPads.Enabled = false;
             this.numMaxPads.Location = new System.Drawing.Point(322, 133);
             this.numMaxPads.Maximum = new decimal(new int[] {
@@ -382,11 +384,29 @@
             this.chkPatchPAL50.Text = "Patch PAL50";
             this.chkPatchPAL50.UseVisualStyleBackColor = true;
             // 
+            // hexBox1
+            // 
+            this.hexBox1.BlrColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(100)))));
+            this.hexBox1.BranchOffsetColor = System.Drawing.Color.Plum;
+            this.hexBox1.ColumnDividerColor = System.Drawing.Color.Empty;
+            this.hexBox1.CommandColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(200)))));
+            this.hexBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.hexBox1.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hexBox1.InfoForeColor = System.Drawing.Color.Empty;
+            this.hexBox1.LinkedBranchColor = System.Drawing.Color.Orange;
+            this.hexBox1.Location = new System.Drawing.Point(378, 24);
+            this.hexBox1.Name = "hexBox1";
+            this.hexBox1.SelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.hexBox1.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
+            this.hexBox1.Size = new System.Drawing.Size(396, 355);
+            this.hexBox1.TabIndex = 25;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 379);
+            this.ClientSize = new System.Drawing.Size(774, 379);
+            this.Controls.Add(this.hexBox1);
             this.Controls.Add(this.chkPatchPAL50);
             this.Controls.Add(this.numVideoOffset);
             this.Controls.Add(this.lblVideoOffset);
@@ -459,6 +479,7 @@
         private System.Windows.Forms.Label lblVideoOffset;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.CheckBox chkPatchPAL50;
+        private Be.Windows.Forms.HexBox hexBox1;
     }
 }
 

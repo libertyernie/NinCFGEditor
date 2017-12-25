@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Be.Windows.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +19,7 @@ namespace NinCFGEditor {
 
         public Form1() {
             InitializeComponent();
-
+            
             _checkboxes = new Dictionary<NinCFGFlags, CheckBox>();
                 
             foreach (object o in Enum.GetValues(typeof(NinCFGFlags))) {
@@ -38,8 +39,9 @@ namespace NinCFGEditor {
                     AutoSize = true
                 };
                 box.CheckedChanged += (sender, e) => {
-                    _originalData.Flags &= ~v;
-                    if (box.Checked) _originalData.Flags |= v;
+                    _workingData.Flags &= ~v;
+                    if (box.Checked) _workingData.Flags |= v;
+                    UpdateHexBox();
                 };
                 flowLayoutPanel1.Controls.Add(box);
                 _checkboxes.Add(v, box);
@@ -51,6 +53,7 @@ namespace NinCFGEditor {
 
         public void Populate() {
             _workingData = _originalData;
+            UpdateHexBox();
 
             foreach (var pair in _checkboxes) {
                 pair.Value.Checked = _workingData.Flags.HasFlag(pair.Key);
@@ -88,6 +91,10 @@ namespace NinCFGEditor {
             }
 
             txtGamePath.Text = _workingData.GamePath;
+        }
+
+        private void UpdateHexBox() {
+            hexBox1.ByteProvider = new ReadOnlyByteProvider(_workingData.GetBytes());
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e) {

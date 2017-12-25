@@ -82,11 +82,11 @@ namespace NinCFGEditor
 
         public NinCFGVideoModeLow ForcedVideoMode {
             get {
-                return VideoModeLow & ~NinCFGVideoModeLow.Progressive & ~NinCFGVideoModeLow.PatchPAL50;
+                return VideoModeLow & ~NinCFGVideoModeLow.ProgressiveScan & ~NinCFGVideoModeLow.PatchPAL50;
             }
             set {
                 var v = value;
-                if (ProgressiveScan) v |= NinCFGVideoModeLow.Progressive;
+                if (ProgressiveScan) v |= NinCFGVideoModeLow.ProgressiveScan;
                 if (PatchPAL50) v |= NinCFGVideoModeLow.PatchPAL50;
                 _videoMode2 = (ushort)v;
             }
@@ -94,13 +94,13 @@ namespace NinCFGEditor
 
         public bool ProgressiveScan {
 			get {
-                return VideoModeLow.HasFlag(NinCFGVideoModeLow.Progressive);
+                return VideoModeLow.HasFlag(NinCFGVideoModeLow.ProgressiveScan);
             }
             set {
                 if (value) {
-                    VideoModeLow |= NinCFGVideoModeLow.Progressive;
+                    VideoModeLow |= NinCFGVideoModeLow.ProgressiveScan;
                 } else {
-                    VideoModeLow &= ~NinCFGVideoModeLow.Progressive;
+                    VideoModeLow &= ~NinCFGVideoModeLow.ProgressiveScan;
                 }
             }
         }
