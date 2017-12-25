@@ -27,7 +27,6 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grpConfig = new System.Windows.Forms.GroupBox();
@@ -77,7 +76,6 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
-            this.closeToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -87,39 +85,38 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open...";
-            // 
-            // closeToolStripMenuItem
-            // 
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.closeToolStripMenuItem.Text = "Close";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // grpConfig
             // 
-            this.grpConfig.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.grpConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grpConfig.Controls.Add(this.flowLayoutPanel1);
-            this.grpConfig.Location = new System.Drawing.Point(12, 27);
+            this.grpConfig.Location = new System.Drawing.Point(12, 264);
             this.grpConfig.Name = "grpConfig";
             this.grpConfig.Size = new System.Drawing.Size(360, 103);
             this.grpConfig.TabIndex = 0;
@@ -128,6 +125,7 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -138,7 +136,7 @@
             // 
             this.ddlVideoMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlVideoMode.FormattingEnabled = true;
-            this.ddlVideoMode.Location = new System.Drawing.Point(82, 136);
+            this.ddlVideoMode.Location = new System.Drawing.Point(82, 27);
             this.ddlVideoMode.Name = "ddlVideoMode";
             this.ddlVideoMode.Size = new System.Drawing.Size(100, 21);
             this.ddlVideoMode.TabIndex = 2;
@@ -147,7 +145,7 @@
             // 
             this.ddlForceVideoMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlForceVideoMode.FormattingEnabled = true;
-            this.ddlForceVideoMode.Location = new System.Drawing.Point(188, 136);
+            this.ddlForceVideoMode.Location = new System.Drawing.Point(188, 27);
             this.ddlForceVideoMode.Name = "ddlForceVideoMode";
             this.ddlForceVideoMode.Size = new System.Drawing.Size(80, 21);
             this.ddlForceVideoMode.TabIndex = 3;
@@ -155,7 +153,7 @@
             // lblVideoMode
             // 
             this.lblVideoMode.AutoSize = true;
-            this.lblVideoMode.Location = new System.Drawing.Point(12, 139);
+            this.lblVideoMode.Location = new System.Drawing.Point(12, 30);
             this.lblVideoMode.Name = "lblVideoMode";
             this.lblVideoMode.Size = new System.Drawing.Size(64, 13);
             this.lblVideoMode.TabIndex = 1;
@@ -164,7 +162,7 @@
             // lblLanguage
             // 
             this.lblLanguage.AutoSize = true;
-            this.lblLanguage.Location = new System.Drawing.Point(12, 166);
+            this.lblLanguage.Location = new System.Drawing.Point(12, 57);
             this.lblLanguage.Name = "lblLanguage";
             this.lblLanguage.Size = new System.Drawing.Size(55, 13);
             this.lblLanguage.TabIndex = 5;
@@ -174,7 +172,7 @@
             // 
             this.ddlLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlLanguage.FormattingEnabled = true;
-            this.ddlLanguage.Location = new System.Drawing.Point(82, 163);
+            this.ddlLanguage.Location = new System.Drawing.Point(82, 54);
             this.ddlLanguage.Name = "ddlLanguage";
             this.ddlLanguage.Size = new System.Drawing.Size(100, 21);
             this.ddlLanguage.TabIndex = 6;
@@ -182,7 +180,7 @@
             // lblGamePath
             // 
             this.lblGamePath.AutoSize = true;
-            this.lblGamePath.Location = new System.Drawing.Point(12, 193);
+            this.lblGamePath.Location = new System.Drawing.Point(12, 84);
             this.lblGamePath.Name = "lblGamePath";
             this.lblGamePath.Size = new System.Drawing.Size(60, 13);
             this.lblGamePath.TabIndex = 8;
@@ -192,7 +190,7 @@
             // 
             this.txtGamePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtGamePath.Location = new System.Drawing.Point(82, 190);
+            this.txtGamePath.Location = new System.Drawing.Point(82, 81);
             this.txtGamePath.Name = "txtGamePath";
             this.txtGamePath.Size = new System.Drawing.Size(260, 20);
             this.txtGamePath.TabIndex = 9;
@@ -200,7 +198,7 @@
             // btnGamePathBrowse
             // 
             this.btnGamePathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGamePathBrowse.Location = new System.Drawing.Point(348, 190);
+            this.btnGamePathBrowse.Location = new System.Drawing.Point(348, 81);
             this.btnGamePathBrowse.Name = "btnGamePathBrowse";
             this.btnGamePathBrowse.Size = new System.Drawing.Size(24, 20);
             this.btnGamePathBrowse.TabIndex = 10;
@@ -210,7 +208,7 @@
             // btnCheatPathBrowse
             // 
             this.btnCheatPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheatPathBrowse.Location = new System.Drawing.Point(348, 216);
+            this.btnCheatPathBrowse.Location = new System.Drawing.Point(348, 107);
             this.btnCheatPathBrowse.Name = "btnCheatPathBrowse";
             this.btnCheatPathBrowse.Size = new System.Drawing.Size(24, 20);
             this.btnCheatPathBrowse.TabIndex = 13;
@@ -221,7 +219,8 @@
             // 
             this.txtCheatPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCheatPath.Location = new System.Drawing.Point(82, 216);
+            this.txtCheatPath.Enabled = false;
+            this.txtCheatPath.Location = new System.Drawing.Point(82, 107);
             this.txtCheatPath.Name = "txtCheatPath";
             this.txtCheatPath.Size = new System.Drawing.Size(260, 20);
             this.txtCheatPath.TabIndex = 12;
@@ -229,7 +228,7 @@
             // lblCheatPath
             // 
             this.lblCheatPath.AutoSize = true;
-            this.lblCheatPath.Location = new System.Drawing.Point(12, 219);
+            this.lblCheatPath.Location = new System.Drawing.Point(12, 110);
             this.lblCheatPath.Name = "lblCheatPath";
             this.lblCheatPath.Size = new System.Drawing.Size(60, 13);
             this.lblCheatPath.TabIndex = 11;
@@ -238,7 +237,7 @@
             // lblMaxPads
             // 
             this.lblMaxPads.AutoSize = true;
-            this.lblMaxPads.Location = new System.Drawing.Point(12, 244);
+            this.lblMaxPads.Location = new System.Drawing.Point(12, 135);
             this.lblMaxPads.Name = "lblMaxPads";
             this.lblMaxPads.Size = new System.Drawing.Size(233, 13);
             this.lblMaxPads.TabIndex = 14;
@@ -246,7 +245,8 @@
             // 
             // numMaxPads
             // 
-            this.numMaxPads.Location = new System.Drawing.Point(322, 242);
+            this.numMaxPads.Enabled = false;
+            this.numMaxPads.Location = new System.Drawing.Point(322, 133);
             this.numMaxPads.Maximum = new decimal(new int[] {
             4,
             0,
@@ -258,7 +258,8 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(120, 268);
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(120, 159);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(62, 20);
             this.textBox1.TabIndex = 17;
@@ -266,7 +267,7 @@
             // lblGameID
             // 
             this.lblGameID.AutoSize = true;
-            this.lblGameID.Location = new System.Drawing.Point(12, 271);
+            this.lblGameID.Location = new System.Drawing.Point(12, 162);
             this.lblGameID.Name = "lblGameID";
             this.lblGameID.Size = new System.Drawing.Size(49, 13);
             this.lblGameID.TabIndex = 16;
@@ -275,7 +276,7 @@
             // lblMemCardBlocks
             // 
             this.lblMemCardBlocks.AutoSize = true;
-            this.lblMemCardBlocks.Location = new System.Drawing.Point(12, 297);
+            this.lblMemCardBlocks.Location = new System.Drawing.Point(12, 188);
             this.lblMemCardBlocks.Name = "lblMemCardBlocks";
             this.lblMemCardBlocks.Size = new System.Drawing.Size(102, 13);
             this.lblMemCardBlocks.TabIndex = 18;
@@ -284,8 +285,9 @@
             // ddlMemCardBlocks
             // 
             this.ddlMemCardBlocks.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlMemCardBlocks.Enabled = false;
             this.ddlMemCardBlocks.FormattingEnabled = true;
-            this.ddlMemCardBlocks.Location = new System.Drawing.Point(120, 294);
+            this.ddlMemCardBlocks.Location = new System.Drawing.Point(120, 185);
             this.ddlMemCardBlocks.Name = "ddlMemCardBlocks";
             this.ddlMemCardBlocks.Size = new System.Drawing.Size(62, 21);
             this.ddlMemCardBlocks.TabIndex = 19;
@@ -293,7 +295,7 @@
             // lblVideoScale
             // 
             this.lblVideoScale.AutoSize = true;
-            this.lblVideoScale.Location = new System.Drawing.Point(12, 323);
+            this.lblVideoScale.Location = new System.Drawing.Point(12, 214);
             this.lblVideoScale.Name = "lblVideoScale";
             this.lblVideoScale.Size = new System.Drawing.Size(62, 13);
             this.lblVideoScale.TabIndex = 20;
@@ -301,12 +303,13 @@
             // 
             // numVideoScale
             // 
+            this.numVideoScale.Enabled = false;
             this.numVideoScale.Increment = new decimal(new int[] {
             2,
             0,
             0,
             0});
-            this.numVideoScale.Location = new System.Drawing.Point(120, 321);
+            this.numVideoScale.Location = new System.Drawing.Point(120, 212);
             this.numVideoScale.Maximum = new decimal(new int[] {
             720,
             0,
@@ -329,7 +332,8 @@
             // chkVideoWidthAuto
             // 
             this.chkVideoWidthAuto.AutoSize = true;
-            this.chkVideoWidthAuto.Location = new System.Drawing.Point(188, 322);
+            this.chkVideoWidthAuto.Enabled = false;
+            this.chkVideoWidthAuto.Location = new System.Drawing.Point(188, 213);
             this.chkVideoWidthAuto.Name = "chkVideoWidthAuto";
             this.chkVideoWidthAuto.Size = new System.Drawing.Size(48, 17);
             this.chkVideoWidthAuto.TabIndex = 22;
@@ -338,7 +342,8 @@
             // 
             // numVideoOffset
             // 
-            this.numVideoOffset.Location = new System.Drawing.Point(120, 347);
+            this.numVideoOffset.Enabled = false;
+            this.numVideoOffset.Location = new System.Drawing.Point(120, 238);
             this.numVideoOffset.Maximum = new decimal(new int[] {
             20,
             0,
@@ -361,7 +366,7 @@
             // lblVideoOffset
             // 
             this.lblVideoOffset.AutoSize = true;
-            this.lblVideoOffset.Location = new System.Drawing.Point(12, 349);
+            this.lblVideoOffset.Location = new System.Drawing.Point(12, 240);
             this.lblVideoOffset.Name = "lblVideoOffset";
             this.lblVideoOffset.Size = new System.Drawing.Size(80, 13);
             this.lblVideoOffset.TabIndex = 23;
@@ -370,7 +375,7 @@
             // chkPatchPAL50
             // 
             this.chkPatchPAL50.AutoSize = true;
-            this.chkPatchPAL50.Location = new System.Drawing.Point(274, 138);
+            this.chkPatchPAL50.Location = new System.Drawing.Point(274, 29);
             this.chkPatchPAL50.Name = "chkPatchPAL50";
             this.chkPatchPAL50.Size = new System.Drawing.Size(89, 17);
             this.chkPatchPAL50.TabIndex = 4;
@@ -381,7 +386,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 431);
+            this.ClientSize = new System.Drawing.Size(384, 379);
             this.Controls.Add(this.chkPatchPAL50);
             this.Controls.Add(this.numVideoOffset);
             this.Controls.Add(this.lblVideoOffset);
@@ -428,7 +433,6 @@
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.GroupBox grpConfig;
         private System.Windows.Forms.ComboBox ddlVideoMode;

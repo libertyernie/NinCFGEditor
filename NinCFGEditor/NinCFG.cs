@@ -11,19 +11,31 @@ namespace NinCFGEditor
 	[StructLayout(LayoutKind.Sequential, Pack = 1)]
     public unsafe struct NIN_CFG {
         buint Magicbytes;        // 0x01070CF6
-        buint Version;       // 0x00000001
+        buint Version;
         buint Config;
-        bushort _videoMode1;
-        bushort _videoMode2;
+        private bushort _videoMode1;
+        private bushort _videoMode2;
         private bint _language;
-        fixed byte GamePath[256];
-        fixed byte CheatPath[256];
+        private fixed sbyte _gamePath[256];
+        private fixed sbyte _cheatPath[256];
         buint MaxPads;
-        fixed byte GameID[4];
+        fixed sbyte GameID[4];
         byte MemCardBlocks;
         sbyte VideoScale;
         sbyte VideoOffset;
         byte Unused;
+
+        public static NIN_CFG Default {
+            get {
+                return new NIN_CFG {
+                    Magicbytes = 0x01070CF6,
+                    Version = 8,
+                    Language = NinCFGLanguage.Auto,
+                    MaxPads = 4,
+                    MemCardBlocks = 2
+                };
+            }
+        }
 
         public static NIN_CFG Read(byte[] data) {
 			fixed (byte* ptr = data) {
@@ -117,6 +129,28 @@ namespace NinCFGEditor
             }
             set {
                 _language = (int)value;
+            }
+        }
+
+        public string GamePath {
+            get {
+                fixed (NIN_CFG* cfg = &this) {
+                    return new string(cfg->_gamePath, 0, 255);
+                }
+            }
+            set {
+                if (value.Any(c => c >= 256 || c < 0)) {
+                    throw new ArgumentException("Only ASCII strings are supported in the game path.");
+                }
+                fixed (NIN_CFG* cfg = &this) {
+                    int i = 0;
+                    foreach (char c in value) {
+                        cfg->_gamePath[i++] = (sbyte)c;
+                    }
+                    while (i < 256) {
+                        cfg->_gamePath[i++] = 0;
+                    }
+                }
             }
         }
 
