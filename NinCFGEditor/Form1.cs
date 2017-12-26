@@ -18,6 +18,15 @@ namespace NinCFGEditor {
         private NIN_CFG _originalData;
         private NIN_CFG _workingData;
 
+        private readonly Dictionary<NinCFGFlags, string> _flagDescriptions = new Dictionary<NinCFGFlags, string> {
+            [NinCFGFlags.Memory_Card_Emulation] = @"Emulates a memory card in Slot A using a .raw file.
+Disable this option if you want to use a real memory card on an original Wii.",
+            [NinCFGFlags.Force_Widescreen] = @"Patch games to use a 16:9 aspect ratio. (widescreen)
+Not all games support this option. The patches will not be applied to games that have built-in support for 16:9; use the game's options screen to configure the display mode.",
+            [NinCFGFlags.Force_Progressive_Scan] = @"Patch games to always use 480p (progressive scan) output.
+Requires component cables, or an HDMI cable on Wii U."
+        };
+
         public Form1() {
             InitializeComponent();
 
@@ -43,6 +52,14 @@ namespace NinCFGEditor {
                 };
                 flowLayoutPanel1.Controls.Add(box);
                 _checkboxes.Add(v, box);
+
+                if (_flagDescriptions.TryGetValue(v, out string desc)) {
+                    flowLayoutPanel1.Controls.Add(new Label {
+                        Text = desc,
+                        Padding = new Padding(16, 0, 0, 4),
+                        AutoSize = true
+                    });
+                }
             }
             
             _originalData = NIN_CFG.Default;
