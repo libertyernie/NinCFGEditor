@@ -100,8 +100,20 @@ namespace NinCFGEditor {
 
             txtGamePath.Text = _workingData.GamePath;
             txtCheatPath.Text = _workingData.CheatPath;
-
             numMaxPads.Value = _workingData.MaxPads;
+            textBox1.Text = _workingData.GameID;
+
+            ddlMemCardBlocks.Items.Clear();
+            foreach (int size in NIN_CFG.SupportedMemoryCardBlockSizes) {
+                ddlMemCardBlocks.Items.Add(size);
+                if (size == _workingData.MemoryCardBlocks) {
+                    ddlMemCardBlocks.SelectedIndex = ddlMemCardBlocks.Items.Count - 1;
+                }
+            }
+            if (ddlMemCardBlocks.SelectedIndex == -1) {
+                ddlMemCardBlocks.Items.Add(_workingData.MemoryCardBlocks);
+                ddlMemCardBlocks.SelectedIndex = ddlMemCardBlocks.Items.Count - 1;
+            }
         }
 
         private void UpdateHexBox() {
@@ -168,6 +180,16 @@ namespace NinCFGEditor {
 
         private void numMaxPads_ValueChanged(object sender, EventArgs e) {
             _workingData.MaxPads = (uint)numMaxPads.Value;
+            UpdateHexBox();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e) {
+            _workingData.GameID = textBox1.Text;
+            UpdateHexBox();
+        }
+
+        private void ddlMemCardBlocks_SelectedIndexChanged(object sender, EventArgs e) {
+            _workingData.MemoryCardBlocks = (int)ddlMemCardBlocks.SelectedItem;
             UpdateHexBox();
         }
     }

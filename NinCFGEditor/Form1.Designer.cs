@@ -264,11 +264,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(120, 159);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(62, 20);
             this.textBox1.TabIndex = 17;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // lblGameID
             // 
@@ -291,12 +291,12 @@
             // ddlMemCardBlocks
             // 
             this.ddlMemCardBlocks.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlMemCardBlocks.Enabled = false;
             this.ddlMemCardBlocks.FormattingEnabled = true;
             this.ddlMemCardBlocks.Location = new System.Drawing.Point(120, 185);
             this.ddlMemCardBlocks.Name = "ddlMemCardBlocks";
             this.ddlMemCardBlocks.Size = new System.Drawing.Size(62, 21);
             this.ddlMemCardBlocks.TabIndex = 19;
+            this.ddlMemCardBlocks.SelectedIndexChanged += new System.EventHandler(this.ddlMemCardBlocks_SelectedIndexChanged);
             // 
             // lblVideoScale
             // 

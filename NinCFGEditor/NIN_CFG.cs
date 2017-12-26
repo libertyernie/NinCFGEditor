@@ -19,8 +19,8 @@ namespace NinCFGEditor
         private fixed sbyte _gamePath[256];
         private fixed sbyte _cheatPath[256];
         public buint MaxPads;
-        fixed sbyte GameID[4];
-        byte MemCardBlocks;
+        private fixed sbyte _gameID[4];
+        private byte _memCardSize;
         sbyte VideoScale;
         sbyte VideoOffset;
         byte Unused;
@@ -32,7 +32,7 @@ namespace NinCFGEditor
                     Version = 8,
                     Language = NinCFGLanguage.Auto,
                     MaxPads = 4,
-                    MemCardBlocks = 2
+                    _memCardSize = 2
                 };
             }
         }
@@ -173,6 +173,51 @@ namespace NinCFGEditor
                     while (i < 256) {
                         cfg->_cheatPath[i++] = 0;
                     }
+                }
+            }
+        }
+
+        public string GameID {
+            get {
+                fixed (NIN_CFG* cfg = &this) {
+                    return new string(cfg->_gameID, 0, 4);
+                }
+            }
+            set {
+                if (value.Length < 4) {
+                    throw new ArgumentException("Game ID must be 4 characters.");
+                }
+                if (value.Any(c => c >= 256 || c < 0)) {
+                    throw new ArgumentException("Only ASCII strings are supported in the game ID.");
+                }
+                fixed (NIN_CFG* cfg = &this) {
+                    int i = 0;
+                    foreach (char c in value) {
+                        cfg->_gameID[i++] = (sbyte)c;
+                    }
+                    while (i < 4) {
+                        cfg->_gameID[i++] = 0;
+                    }
+                }
+            }
+        }
+
+        public int MemoryCardBlocks {
+            get {
+                return (1 << (_memCardSize + 6)) - 5;
+            }
+            set {
+                if (!SupportedMemoryCardBlockSizes.Contains(value)) {
+                    throw new ArgumentException($"{value} is not a supported memory card block size.");
+                }
+                _memCardSize = (byte)(Math.Log(value + 5, 2) - 6);
+            }
+        }
+
+        public static IEnumerable<int> SupportedMemoryCardBlockSizes {
+            get {
+                for (int i = 0; i < 6; i++) {
+                    yield return (1 << (i + 6)) - 5;
                 }
             }
         }
