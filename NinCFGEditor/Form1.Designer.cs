@@ -54,7 +54,7 @@
             this.numVideoOffset = new System.Windows.Forms.NumericUpDown();
             this.lblVideoOffset = new System.Windows.Forms.Label();
             this.chkPatchPAL50 = new System.Windows.Forms.CheckBox();
-            this.hexBox1 = new Be.Windows.Forms.HexBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.grpConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxPads)).BeginInit();
@@ -119,7 +119,7 @@
             this.grpConfig.Controls.Add(this.flowLayoutPanel1);
             this.grpConfig.Location = new System.Drawing.Point(12, 264);
             this.grpConfig.Name = "grpConfig";
-            this.grpConfig.Size = new System.Drawing.Size(360, 205);
+            this.grpConfig.Size = new System.Drawing.Size(360, 265);
             this.grpConfig.TabIndex = 0;
             this.grpConfig.TabStop = false;
             this.grpConfig.Text = "Configuration Options";
@@ -128,9 +128,10 @@
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(354, 186);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(354, 246);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // ddlVideoMode
@@ -389,30 +390,20 @@
             this.chkPatchPAL50.UseVisualStyleBackColor = true;
             this.chkPatchPAL50.CheckedChanged += new System.EventHandler(this.chkPatchPAL50_CheckedChanged);
             // 
-            // hexBox1
+            // panel1
             // 
-            this.hexBox1.BlrColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(100)))));
-            this.hexBox1.BranchOffsetColor = System.Drawing.Color.Plum;
-            this.hexBox1.ColumnDividerColor = System.Drawing.Color.Empty;
-            this.hexBox1.CommandColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(200)))));
-            this.hexBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hexBox1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hexBox1.InfoForeColor = System.Drawing.Color.Empty;
-            this.hexBox1.LinkedBranchColor = System.Drawing.Color.Orange;
-            this.hexBox1.Location = new System.Drawing.Point(378, 24);
-            this.hexBox1.Name = "hexBox1";
-            this.hexBox1.SelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.hexBox1.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
-            this.hexBox1.Size = new System.Drawing.Size(356, 457);
-            this.hexBox1.TabIndex = 25;
-            this.hexBox1.UseFixedBytesPerLine = true;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(378, 24);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(356, 517);
+            this.panel1.TabIndex = 25;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(734, 481);
-            this.Controls.Add(this.hexBox1);
+            this.ClientSize = new System.Drawing.Size(734, 541);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.chkPatchPAL50);
             this.Controls.Add(this.numVideoOffset);
             this.Controls.Add(this.lblVideoOffset);
@@ -486,7 +477,7 @@
         private System.Windows.Forms.Label lblVideoOffset;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.CheckBox chkPatchPAL50;
-        private Be.Windows.Forms.HexBox hexBox1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

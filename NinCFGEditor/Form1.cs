@@ -12,6 +12,7 @@ using System.Windows.Forms;
 
 namespace NinCFGEditor {
     public partial class Form1 : Form {
+        private HexBox _hexBox;
         private Dictionary<NinCFGFlags, CheckBox> _checkboxes;
 
         private NIN_CFG _originalData;
@@ -19,7 +20,13 @@ namespace NinCFGEditor {
 
         public Form1() {
             InitializeComponent();
-            
+
+            _hexBox = new HexBox() {
+                Dock = DockStyle.Fill,
+            };
+            _hexBox.Font = new Font(_hexBox.Font.FontFamily, 8);
+            panel1.Controls.Add(_hexBox);
+
             _checkboxes = new Dictionary<NinCFGFlags, CheckBox>();
                 
             foreach (object o in Enum.GetValues(typeof(NinCFGFlags))) {
@@ -118,7 +125,7 @@ namespace NinCFGEditor {
         }
 
         private void UpdateHexBox() {
-            hexBox1.ByteProvider = new ReadOnlyByteProvider(_workingData.GetBytes());
+            _hexBox.ByteProvider = new ReadOnlyByteProvider(_workingData.GetBytes());
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e) {
