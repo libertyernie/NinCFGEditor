@@ -24,18 +24,9 @@ namespace NinCFGEditor {
                 
             foreach (object o in Enum.GetValues(typeof(NinCFGFlags))) {
                 NinCFGFlags v = (NinCFGFlags)o;
-
-                StringBuilder sb = new StringBuilder();
-                bool lastLower = false;
-                foreach (char c in v.ToString()) {
-                    if (char.IsUpper(c) && lastLower) {
-                        sb.Append(' ');
-                    }
-                    sb.Append(c);
-                    lastLower = char.IsLower(c);
-                }
+                
                 CheckBox box = new CheckBox {
-                    Text = sb.ToString(),
+                    Text = v.ToString().Replace('_', ' '),
                     AutoSize = true
                 };
                 box.CheckedChanged += (sender, e) => {
