@@ -25,7 +25,7 @@ namespace NinCFGEditor {
                 Dock = DockStyle.Fill,
             };
             _hexBox.Font = new Font(_hexBox.Font.FontFamily, 8);
-            panel1.Controls.Add(_hexBox);
+            pnlHex.Controls.Add(_hexBox);
 
             _checkboxes = new Dictionary<NinCFGFlags, CheckBox>();
                 
