@@ -114,6 +114,16 @@ namespace NinCFGEditor {
                 ddlMemCardBlocks.Items.Add(_workingData.MemoryCardBlocks);
                 ddlMemCardBlocks.SelectedIndex = ddlMemCardBlocks.Items.Count - 1;
             }
+
+            if (_workingData.VideoScale == 0) {
+                chkVideoWidthAuto.Checked = true;
+                numVideoScale.Value = 640;
+            } else {
+                chkVideoWidthAuto.Checked = false;
+                numVideoScale.Value = _workingData.VideoScale + 600;
+            }
+
+            numVideoOffset.Value = _workingData.VideoOffset;
         }
 
         private void UpdateHexBox() {
@@ -190,6 +200,31 @@ namespace NinCFGEditor {
 
         private void ddlMemCardBlocks_SelectedIndexChanged(object sender, EventArgs e) {
             _workingData.MemoryCardBlocks = (int)ddlMemCardBlocks.SelectedItem;
+            UpdateHexBox();
+        }
+
+        private void numVideoScale_ValueChanged(object sender, EventArgs e) {
+            if (chkVideoWidthAuto.Checked) {
+                _workingData.VideoScale = 0;
+            } else {
+                _workingData.VideoScale = (sbyte)(numVideoScale.Value - 600);
+            }
+            UpdateHexBox();
+        }
+
+        private void chkVideoWidthAuto_CheckedChanged(object sender, EventArgs e) {
+            if (chkVideoWidthAuto.Checked) {
+                _workingData.VideoScale = 0;
+                numVideoScale.Enabled = false;
+            } else {
+                _workingData.VideoScale = (sbyte)(numVideoScale.Value - 600);
+                numVideoScale.Enabled = true;
+            }
+            UpdateHexBox();
+        }
+
+        private void numVideoOffset_ValueChanged(object sender, EventArgs e) {
+            _workingData.VideoOffset = (sbyte)numVideoOffset.Value;
             UpdateHexBox();
         }
     }

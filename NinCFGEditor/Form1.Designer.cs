@@ -309,7 +309,6 @@
             // 
             // numVideoScale
             // 
-            this.numVideoScale.Enabled = false;
             this.numVideoScale.Increment = new decimal(new int[] {
             2,
             0,
@@ -334,21 +333,21 @@
             0,
             0,
             0});
+            this.numVideoScale.ValueChanged += new System.EventHandler(this.numVideoScale_ValueChanged);
             // 
             // chkVideoWidthAuto
             // 
             this.chkVideoWidthAuto.AutoSize = true;
-            this.chkVideoWidthAuto.Enabled = false;
             this.chkVideoWidthAuto.Location = new System.Drawing.Point(188, 213);
             this.chkVideoWidthAuto.Name = "chkVideoWidthAuto";
             this.chkVideoWidthAuto.Size = new System.Drawing.Size(48, 17);
             this.chkVideoWidthAuto.TabIndex = 22;
             this.chkVideoWidthAuto.Text = "Auto";
             this.chkVideoWidthAuto.UseVisualStyleBackColor = true;
+            this.chkVideoWidthAuto.CheckedChanged += new System.EventHandler(this.chkVideoWidthAuto_CheckedChanged);
             // 
             // numVideoOffset
             // 
-            this.numVideoOffset.Enabled = false;
             this.numVideoOffset.Location = new System.Drawing.Point(120, 238);
             this.numVideoOffset.Maximum = new decimal(new int[] {
             20,
@@ -368,6 +367,7 @@
             0,
             0,
             0});
+            this.numVideoOffset.ValueChanged += new System.EventHandler(this.numVideoOffset_ValueChanged);
             // 
             // lblVideoOffset
             // 

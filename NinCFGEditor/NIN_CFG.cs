@@ -21,8 +21,8 @@ namespace NinCFGEditor
         public buint MaxPads;
         private fixed sbyte _gameID[4];
         private byte _memCardSize;
-        sbyte VideoScale;
-        sbyte VideoOffset;
+        public sbyte VideoScale;
+        public sbyte VideoOffset;
         byte Unused;
 
         public static NIN_CFG Default {
