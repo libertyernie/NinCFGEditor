@@ -18,7 +18,7 @@ namespace NinCFGEditor
         private bint _language;
         private fixed sbyte _gamePath[256];
         private fixed sbyte _cheatPath[256];
-        buint MaxPads;
+        public buint MaxPads;
         fixed sbyte GameID[4];
         byte MemCardBlocks;
         sbyte VideoScale;
@@ -147,6 +147,31 @@ namespace NinCFGEditor
                     }
                     while (i < 256) {
                         cfg->_gamePath[i++] = 0;
+                    }
+                }
+            }
+        }
+
+        public string CheatPath {
+            get {
+                fixed (NIN_CFG* cfg = &this) {
+                    return new string(cfg->_cheatPath, 0, 255);
+                }
+            }
+            set {
+                if (value.Length > 255) {
+                    throw new ArgumentException("Cheat path cannot exceed 255 characters.");
+                }
+                if (value.Any(c => c >= 256 || c < 0)) {
+                    throw new ArgumentException("Only ASCII strings are supported in the cheat path.");
+                }
+                fixed (NIN_CFG* cfg = &this) {
+                    int i = 0;
+                    foreach (char c in value) {
+                        cfg->_cheatPath[i++] = (sbyte)c;
+                    }
+                    while (i < 256) {
+                        cfg->_cheatPath[i++] = 0;
                     }
                 }
             }

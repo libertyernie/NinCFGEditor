@@ -95,7 +95,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="NinCFG.cs" />
+    <Compile Include="NIN_CFG.cs" />
     <None Include="Hex Editor\HexBox.snk" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -99,6 +99,9 @@ namespace NinCFGEditor {
             }
 
             txtGamePath.Text = _workingData.GamePath;
+            txtCheatPath.Text = _workingData.CheatPath;
+
+            numMaxPads.Value = _workingData.MaxPads;
         }
 
         private void UpdateHexBox() {
@@ -155,6 +158,16 @@ namespace NinCFGEditor {
 
         private void txtGamePath_TextChanged(object sender, EventArgs e) {
             _workingData.GamePath = txtGamePath.Text;
+            UpdateHexBox();
+        }
+
+        private void txtCheatPath_TextChanged(object sender, EventArgs e) {
+            _workingData.CheatPath = txtCheatPath.Text;
+            UpdateHexBox();
+        }
+
+        private void numMaxPads_ValueChanged(object sender, EventArgs e) {
+            _workingData.MaxPads = (uint)numMaxPads.Value;
             UpdateHexBox();
         }
     }

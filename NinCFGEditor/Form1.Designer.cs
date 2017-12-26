@@ -68,7 +68,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(774, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(734, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -119,7 +119,7 @@
             this.grpConfig.Controls.Add(this.flowLayoutPanel1);
             this.grpConfig.Location = new System.Drawing.Point(12, 264);
             this.grpConfig.Name = "grpConfig";
-            this.grpConfig.Size = new System.Drawing.Size(360, 103);
+            this.grpConfig.Size = new System.Drawing.Size(360, 205);
             this.grpConfig.TabIndex = 0;
             this.grpConfig.TabStop = false;
             this.grpConfig.Text = "Configuration Options";
@@ -130,7 +130,7 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(354, 84);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(354, 186);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // ddlVideoMode
@@ -224,11 +224,11 @@
             // 
             this.txtCheatPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCheatPath.Enabled = false;
             this.txtCheatPath.Location = new System.Drawing.Point(82, 107);
             this.txtCheatPath.Name = "txtCheatPath";
             this.txtCheatPath.Size = new System.Drawing.Size(260, 20);
             this.txtCheatPath.TabIndex = 12;
+            this.txtCheatPath.TextChanged += new System.EventHandler(this.txtCheatPath_TextChanged);
             // 
             // lblCheatPath
             // 
@@ -251,7 +251,6 @@
             // numMaxPads
             // 
             this.numMaxPads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numMaxPads.Enabled = false;
             this.numMaxPads.Location = new System.Drawing.Point(322, 133);
             this.numMaxPads.Maximum = new decimal(new int[] {
             4,
@@ -261,6 +260,7 @@
             this.numMaxPads.Name = "numMaxPads";
             this.numMaxPads.Size = new System.Drawing.Size(50, 20);
             this.numMaxPads.TabIndex = 15;
+            this.numMaxPads.ValueChanged += new System.EventHandler(this.numMaxPads_ValueChanged);
             // 
             // textBox1
             // 
@@ -396,21 +396,22 @@
             this.hexBox1.ColumnDividerColor = System.Drawing.Color.Empty;
             this.hexBox1.CommandColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(200)))));
             this.hexBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.hexBox1.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hexBox1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hexBox1.InfoForeColor = System.Drawing.Color.Empty;
             this.hexBox1.LinkedBranchColor = System.Drawing.Color.Orange;
             this.hexBox1.Location = new System.Drawing.Point(378, 24);
             this.hexBox1.Name = "hexBox1";
             this.hexBox1.SelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.hexBox1.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
-            this.hexBox1.Size = new System.Drawing.Size(396, 355);
+            this.hexBox1.Size = new System.Drawing.Size(356, 457);
             this.hexBox1.TabIndex = 25;
+            this.hexBox1.UseFixedBytesPerLine = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 379);
+            this.ClientSize = new System.Drawing.Size(734, 481);
             this.Controls.Add(this.hexBox1);
             this.Controls.Add(this.chkPatchPAL50);
             this.Controls.Add(this.numVideoOffset);
