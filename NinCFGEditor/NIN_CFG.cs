@@ -184,7 +184,7 @@ namespace NinCFGEditor
                 }
             }
             set {
-                if (value.Length < 4) {
+                if (value.Length > 4) {
                     throw new ArgumentException("Game ID must be 4 characters.");
                 }
                 if (value.Any(c => c >= 256 || c < 0)) {

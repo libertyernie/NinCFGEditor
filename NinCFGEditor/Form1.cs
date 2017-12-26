@@ -145,13 +145,19 @@ namespace NinCFGEditor {
             }
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) {
+        private bool saveAs() {
             using (var dialog = new SaveFileDialog()) {
                 dialog.DefaultExt = "bin";
                 if (dialog.ShowDialog(this) == DialogResult.OK) {
                     File.WriteAllBytes(dialog.FileName, _workingData.GetBytes());
+                    return true;
                 }
             }
+            return false;
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) {
+            saveAs();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -226,6 +232,19 @@ namespace NinCFGEditor {
         private void numVideoOffset_ValueChanged(object sender, EventArgs e) {
             _workingData.VideoOffset = (sbyte)numVideoOffset.Value;
             UpdateHexBox();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
+            if (!_originalData.Equals(_workingData)) {
+                switch (MessageBox.Show(this, "Would you like to save your changes?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)) {
+                    case DialogResult.Yes:
+                        if (!saveAs()) e.Cancel = true;
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                }
+            }
         }
     }
 }
