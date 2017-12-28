@@ -17,7 +17,7 @@ namespace NinCFGEditor {
         Auto_Boot = 1 << 7,
         Unlock_Read_Speed = 1 << 8,
         OS_Report = 1 << 9,
-        DriveAccess_LED = 1 << 11,
+        Drive_Access_LED = 1 << 11,
         Log = 1 << 12,
         Memory_Card_Multi = 1 << 13,
         Native_Control = 1 << 14,

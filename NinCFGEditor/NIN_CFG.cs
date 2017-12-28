@@ -30,6 +30,7 @@ namespace NinCFGEditor
                 return new NIN_CFG {
                     Magicbytes = 0x01070CF6,
                     Version = 8,
+                    Flags = NinCFGFlags.Memory_Card_Emulation,
                     Language = NinCFGLanguage.Auto,
                     MaxPads = 4,
                     _memCardSize = 2

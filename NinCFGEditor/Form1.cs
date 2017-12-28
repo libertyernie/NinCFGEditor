@@ -24,7 +24,23 @@ Disable this option if you want to use a real memory card on an original Wii.",
             [NinCFGFlags.Force_Widescreen] = @"Patch games to use a 16:9 aspect ratio. (widescreen)
 Not all games support this option. The patches will not be applied to games that have built-in support for 16:9; use the game's options screen to configure the display mode.",
             [NinCFGFlags.Force_Progressive_Scan] = @"Patch games to always use 480p (progressive scan) output.
-Requires component cables, or an HDMI cable on Wii U."
+Requires component cables, or an HDMI cable on Wii U.",
+            [NinCFGFlags.Unlock_Read_Speed] = @"Disc read speed is normally limited to the performance of the original GameCube disc drive.
+Unlocking read speed can allow for faster load times, but it can cause problems with games that are extremely sensitive to disc read timing.",
+            [NinCFGFlags.Wii_U_Widescreen] = @"On Wii U, Nintendont sets the display to 4:3, which results in bars on the sides of the screen. If playing a game that supports widescreen, enable this option to set the display back to 16:9.
+This option has no effect on original Wii systems.",
+            [NinCFGFlags.Drive_Access_LED] = @"Use the drive slot LED as a disk activity indicator.
+The LED will be turned on when reading from or writing to the storage device.
+This option has no effect on Wii U, since the Wii U does not have a drive slot LED.",
+            [NinCFGFlags.Memory_Card_Multi] = @"Nintendont usually uses one emulated memory card image per game.
+Enabling MULTI switches this to use one memory card image for all USA and PAL games, and one image for all JPN games.",
+            [NinCFGFlags.Native_Control] = @"Native Control allows use of GBA link cables on original Wii systems.
+NOTE: Enabling Native Control will disable Bluetooth and USB HID controllers.
+This option is not available on Wii U, since it does not have built-in GameCube controller ports.",
+            [NinCFGFlags.Triforce_Arcade_Mode] = @"Arcade Mode re-enables thecoin slot functionality ofTriforce games.
+To insert a coin, move the C stick in any direction.",
+            [NinCFGFlags.Classic_Controller_Rumble] = @"Enable rumble on Wii Remotes when using the Wii Classic Controller or Wii Classic Controller Pro.",
+            [NinCFGFlags.Skip_IPL] = @"Skip loading the GameCube IPL, even if it's present on the storage device."
         };
 
         public Form1() {
@@ -119,15 +135,11 @@ Requires component cables, or an HDMI cable on Wii U."
             textBox1.Text = _workingData.GameID;
 
             ddlMemCardBlocks.Items.Clear();
-            foreach (int size in NIN_CFG.SupportedMemoryCardBlockSizes) {
+            foreach (int size in new[] { 59, 251, _workingData.MemoryCardBlocks }.Distinct()) {
                 ddlMemCardBlocks.Items.Add(size);
                 if (size == _workingData.MemoryCardBlocks) {
                     ddlMemCardBlocks.SelectedIndex = ddlMemCardBlocks.Items.Count - 1;
                 }
-            }
-            if (ddlMemCardBlocks.SelectedIndex == -1) {
-                ddlMemCardBlocks.Items.Add(_workingData.MemoryCardBlocks);
-                ddlMemCardBlocks.SelectedIndex = ddlMemCardBlocks.Items.Count - 1;
             }
 
             if (_workingData.VideoScale == 0) {
