@@ -57,6 +57,13 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblGameIDAuto = new System.Windows.Forms.Label();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gamespecificMetaxmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importMetaxmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportMetaxmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportIconpngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxPads)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVideoScale)).BeginInit();
@@ -68,7 +75,9 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.toolsToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(734, 24);
@@ -445,6 +454,57 @@
             this.lblGameIDAuto.Text = "Automatically detected";
             this.lblGameIDAuto.Visible = false;
             // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gamespecificMetaxmlToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // gamespecificMetaxmlToolStripMenuItem
+            // 
+            this.gamespecificMetaxmlToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importMetaxmlToolStripMenuItem,
+            this.exportMetaxmlToolStripMenuItem,
+            this.exportIconpngToolStripMenuItem});
+            this.gamespecificMetaxmlToolStripMenuItem.Name = "gamespecificMetaxmlToolStripMenuItem";
+            this.gamespecificMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.gamespecificMetaxmlToolStripMenuItem.Text = "Game-specific meta.xml";
+            // 
+            // importMetaxmlToolStripMenuItem
+            // 
+            this.importMetaxmlToolStripMenuItem.Name = "importMetaxmlToolStripMenuItem";
+            this.importMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.importMetaxmlToolStripMenuItem.Text = "Import meta.xml";
+            // 
+            // exportMetaxmlToolStripMenuItem
+            // 
+            this.exportMetaxmlToolStripMenuItem.Name = "exportMetaxmlToolStripMenuItem";
+            this.exportMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.exportMetaxmlToolStripMenuItem.Text = "Export meta.xml";
+            // 
+            // exportIconpngToolStripMenuItem
+            // 
+            this.exportIconpngToolStripMenuItem.Name = "exportIconpngToolStripMenuItem";
+            this.exportIconpngToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.exportIconpngToolStripMenuItem.Text = "Export icon.png";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -506,6 +566,13 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblGameIDAuto;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gamespecificMetaxmlToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importMetaxmlToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportMetaxmlToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportIconpngToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 
