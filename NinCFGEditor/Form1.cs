@@ -228,6 +228,7 @@ To insert a coin, move the C stick in any direction.",
 
         private void textBox1_TextChanged(object sender, EventArgs e) {
             _workingData.GameID = textBox1.Text;
+            lblGameIDAuto.Visible = false;
             UpdateHexBox();
         }
 
@@ -271,6 +272,58 @@ To insert a coin, move the C stick in any direction.",
                         e.Cancel = true;
                         break;
                 }
+            }
+        }
+
+        private void btnGamePathBrowse_Click(object sender, EventArgs e) {
+            using (var dialog = new OpenFileDialog()) {
+                dialog.Filter = "GameCube disc images (*.iso, *.gcm)|*.iso;*.gcm";
+                if (dialog.ShowDialog(this) == DialogResult.OK) {
+                    string path = dialog.FileName.Replace('\\', '/');
+                    while (path.Length > 0 && path[0] != '/') {
+                        path = path.Substring(1);
+                    }
+                    txtGamePath.Text = path;
+
+                    // Read ID from disc image
+                    ReadGameId();
+                }
+            }
+        }
+
+        private void btnCheatPathBrowse_Click(object sender, EventArgs e) {
+
+        }
+
+        private Task<string> FindISOPath() {
+            return Task.Run(() => {
+                string relativePath = txtGamePath.Text;
+                while (relativePath.Length > 0 && relativePath[0] == '/') {
+                    relativePath = relativePath.Substring(1);
+                }
+                foreach (var driveInfo in DriveInfo.GetDrives()) {
+                    string p = Path.Combine(driveInfo.RootDirectory.FullName, relativePath);
+                    try {
+                        if (File.Exists(p)) return p;
+                    } catch (Exception ex) {
+                        Console.Error.WriteLine(ex.Message);
+                        Console.Error.WriteLine(ex.StackTrace);
+                    }
+                }
+                return null;
+            });
+        }
+
+        private async void ReadGameId() {
+            string path = await FindISOPath();
+            byte[] buffer = new byte[4];
+            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read)) {
+                fs.Read(buffer, 0, 4);
+            }
+            char[] characters = buffer.Select(b => (char)b).ToArray();
+            if (characters.All(c => char.IsLetterOrDigit(c))) {
+                textBox1.Text = new string(characters);
+                lblGameIDAuto.Visible = true;
             }
         }
     }

@@ -56,6 +56,7 @@
             this.pnlHex = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblGameIDAuto = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxPads)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVideoScale)).BeginInit();
@@ -201,6 +202,7 @@
             this.btnGamePathBrowse.TabIndex = 10;
             this.btnGamePathBrowse.Text = "...";
             this.btnGamePathBrowse.UseVisualStyleBackColor = true;
+            this.btnGamePathBrowse.Click += new System.EventHandler(this.btnGamePathBrowse_Click);
             // 
             // btnCheatPathBrowse
             // 
@@ -211,6 +213,7 @@
             this.btnCheatPathBrowse.TabIndex = 13;
             this.btnCheatPathBrowse.Text = "...";
             this.btnCheatPathBrowse.UseVisualStyleBackColor = true;
+            this.btnCheatPathBrowse.Click += new System.EventHandler(this.btnCheatPathBrowse_Click);
             // 
             // txtCheatPath
             // 
@@ -391,6 +394,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblGameIDAuto);
             this.panel2.Controls.Add(this.lblVideoMode);
             this.panel2.Controls.Add(this.chkPatchPAL50);
             this.panel2.Controls.Add(this.ddlVideoMode);
@@ -429,6 +433,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(378, 522);
             this.panel1.TabIndex = 0;
+            // 
+            // lblGameIDAuto
+            // 
+            this.lblGameIDAuto.AutoSize = true;
+            this.lblGameIDAuto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGameIDAuto.Location = new System.Drawing.Point(179, 138);
+            this.lblGameIDAuto.Name = "lblGameIDAuto";
+            this.lblGameIDAuto.Size = new System.Drawing.Size(114, 13);
+            this.lblGameIDAuto.TabIndex = 25;
+            this.lblGameIDAuto.Text = "Automatically detected";
+            this.lblGameIDAuto.Visible = false;
             // 
             // Form1
             // 
@@ -490,6 +505,7 @@
         private System.Windows.Forms.Panel pnlHex;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblGameIDAuto;
     }
 }
 
