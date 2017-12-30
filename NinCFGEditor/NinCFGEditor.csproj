@@ -56,12 +56,15 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameCube\Classes.cs" />
+    <Compile Include="GameCube\Structs.cs" />
     <Compile Include="NinCFGFlags.cs" />
     <Compile Include="NinCFGLanguage.cs" />
     <Compile Include="NinCFGVideoMode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadOnlyByteProvider.cs" />
+    <Compile Include="UInt24.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

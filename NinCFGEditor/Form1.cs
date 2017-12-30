@@ -1,12 +1,10 @@
 ﻿using Be.Windows.Forms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -359,6 +357,13 @@ https://sourceforge.net/projects/hexbox/");
             try {
                 string path = await FindISOPath();
                 using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 1048576)) {
+                    //var h = await GameCubeDiscReader.ReadGameCubeDiscHeaderAsync(fs);
+
+                    //fs.Position = h.fstOffset;
+                    //var fst = await GameCubeDiscReader.ReadFST(fs, h.fstSize);
+
+                    //foreach (var x in fst.GetAllEntries()) Console.WriteLine($"{x.GetType().Name} {x.Name} (in {x.Parent?.Name})");
+
                     byte[] magicword = new byte[4];
                     fs.Position = 0x31c2bd00;
                     while (await fs.ReadAsync(magicword, 0, 4) == 4) {
