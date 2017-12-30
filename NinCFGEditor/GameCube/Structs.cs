@@ -9,18 +9,26 @@ using System.Threading.Tasks;
 namespace NinCFGEditor.GameCube {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public unsafe struct DiscHeader {
-        sbyte _gameId;
-        fixed sbyte _gameCode[2];
-        sbyte _regionCode;
-        fixed sbyte _makerCode[2];
-        byte _discNumber;
+        public sbyte _discId;
+        public fixed sbyte _gameCode[2];
+        public sbyte _regionCode;
+        public fixed sbyte _makerCode[2];
+        public byte _discNumber;
         byte _discVersion;
-        byte _audioStreaming;
-        byte _streamingBufferSize;
-        fixed byte _unused[14];
-        bint _wiiMagicWord;
-        bint _gcnMagicWord;
-        fixed sbyte _gameTitle[64];
+        public byte _audioStreaming;
+        public byte _streamingBufferSize;
+        public fixed byte _unused[14];
+        public bint _wiiMagicWord;
+        public bint _gcnMagicWord;
+        public fixed sbyte _gameTitle[64];
+
+        public string GameID {
+            get {
+                fixed (sbyte* ptr = &_discId) {
+                    return new string(ptr);
+                }
+            }
+        }
     }
 
     [StructLayout(LayoutKind.Explicit, Pack = 1, Size = 0x440)]
@@ -53,18 +61,6 @@ namespace NinCFGEditor.GameCube {
 
         [FieldOffset(8)]
         public bint numEntries;
-        
-        //public static IEnumerable<FSTEntry> GetEntries(byte[] b) {
-        //    List<FSTEntry> list = new List<FSTEntry>();
-        //    fixed (byte* ptr = b) {
-        //        FSTHeader* h = (FSTHeader*)ptr;
-        //        for (int i = 0; i < h->_numEntries; i++) {
-        //            FSTEntry* e = (FSTEntry*)(ptr + 12 + i);
-        //            list.Add(*e);
-        //        }
-        //    }
-        //    return list;
-        //}
     }
 
     public enum FSTFlags : byte {
@@ -80,9 +76,9 @@ namespace NinCFGEditor.GameCube {
         public BUInt24 filenameOffset;
         [FieldOffset(4)]
         public bint fileOffset;
+        [FieldOffset(4)]
+        public bint parentOffset;
         [FieldOffset(8)]
         public buint fileLength;
-        [FieldOffset(8)]
-        public buint nextOffset;
     }
 }

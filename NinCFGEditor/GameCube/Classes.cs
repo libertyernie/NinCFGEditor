@@ -27,60 +27,55 @@ namespace NinCFGEditor.GameCube {
     }
 
     public unsafe class FST : IDisposable {
-        public FSTHeader* Header => (FSTHeader*)Address;
         public readonly IntPtr Address;
+        public readonly IReadOnlyList<FSTEntryNode> RootEntries;
+        public readonly IReadOnlyList<FSTEntryNode> AllEntries;
 
+        public FSTHeader* Header => (FSTHeader*)Address;
         public IntPtr StringTable => Address + Header->numEntries * 12;
 
         public FST(byte[] buffer) {
             Address = Marshal.AllocHGlobal(buffer.Length);
             Marshal.Copy(buffer, 0, Address, buffer.Length);
-        }
 
-        public IEnumerable<FSTEntryNode> GetAllEntries() {
             var list = new List<FSTEntryNode>();
-            for (int i = 1; i < Header->numEntries; i++) {
+            for (int i = 0; i < Header->numEntries; i++) {
                 FSTEntry* e = (FSTEntry*)(Address + 12 * i);
                 if ((e->flags & FSTFlags.Directory) != 0) {
-                    FSTDirectory parent = e->fileOffset == 0
+                    FSTDirectory parent = !list.Any()
                         ? null
-                        : (FSTDirectory)list[e->fileOffset - 1];
-                    list.Add(new FSTDirectory(this, *e));
+                        : (FSTDirectory)list[e->parentOffset];
+                    var entry = new FSTDirectory(this, *e);
+                    parent?.Children?.Add(entry);
+                    list.Add(entry);
                 } else {
-                    list.Add(new FSTFile(this, *e, (FSTDirectory)list.LastOrDefault(x => x is FSTDirectory)));
+                    var parent = (FSTDirectory)list.LastOrDefault(x => x is FSTDirectory);
+                    var entry = new FSTFile(this, *e);
+                    parent?.Children?.Add(entry);
+                    list.Add(entry);
                 }
             }
-            return list;
+
+            AllEntries = list;
+            RootEntries = (list[0] as FSTDirectory)?.Children;
         }
 
         #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
+        private bool disposedValue = false;
 
         protected virtual void Dispose(bool disposing) {
             if (!disposedValue) {
-                if (disposing) {
-                    // TODO: dispose managed state (managed objects).
-                }
-
-                // free unmanaged resources (unmanaged objects) and override a finalizer below.
                 Marshal.FreeHGlobal((IntPtr)Header);
-                // TODO: set large fields to null.
-
                 disposedValue = true;
             }
         }
-
-        // Override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        
          ~FST() {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(false);
         }
-
-        // This code added to correctly implement the disposable pattern.
+        
         public void Dispose() {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
-            // Uncomment the following line if the finalizer is overridden above.
             GC.SuppressFinalize(this);
         }
         #endregion
@@ -88,13 +83,11 @@ namespace NinCFGEditor.GameCube {
 
     public abstract class FSTEntryNode {
         public readonly FST Root;
-        private FSTEntry _entry;
-        public readonly FSTDirectory Parent;
+        protected FSTEntry _entry;
 
-        public FSTEntryNode(FST root, FSTEntry entry, FSTDirectory parent = null) {
+        public FSTEntryNode(FST root, FSTEntry entry) {
             this.Root = root;
             this._entry = entry;
-            this.Parent = parent;
         }
 
         public unsafe string Name {
@@ -102,13 +95,26 @@ namespace NinCFGEditor.GameCube {
                 return new string((sbyte*)Root.StringTable + _entry.filenameOffset);
             }
         }
+
+        public override string ToString() {
+            return $"{GetType().Name} {Name}";
+        }
     }
 
     public class FSTDirectory : FSTEntryNode {
-        public FSTDirectory(FST root, FSTEntry entry, FSTDirectory parent = null) : base(root, entry, parent) { }
+        public readonly List<FSTEntryNode> Children = new List<FSTEntryNode>();
+
+        public FSTDirectory(FST root, FSTEntry entry) : base(root, entry) { }
+
+        public override string ToString() {
+            return $"{base.ToString()} ({Children.Count} entries)";
+        }
     }
 
     public class FSTFile : FSTEntryNode {
-        public FSTFile(FST root, FSTEntry entry, FSTDirectory parent = null) : base(root, entry, parent) { }
+        public FSTFile(FST root, FSTEntry entry) : base(root, entry) { }
+
+        public int FileOffset => _entry.fileOffset;
+        public uint Length => _entry.fileLength;
     }
 }

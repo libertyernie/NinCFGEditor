@@ -1,4 +1,5 @@
 ﻿using Be.Windows.Forms;
+using NinCFGEditor.GameCube;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -357,60 +358,49 @@ https://sourceforge.net/projects/hexbox/");
             try {
                 string path = await FindISOPath();
                 using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 1048576)) {
-                    //var h = await GameCubeDiscReader.ReadGameCubeDiscHeaderAsync(fs);
+                    var h = await GameCubeDiscReader.ReadGameCubeDiscHeaderAsync(fs);
 
-                    //fs.Position = h.fstOffset;
-                    //var fst = await GameCubeDiscReader.ReadFST(fs, h.fstSize);
+                    fs.Position = h.fstOffset;
+                    var fst = await GameCubeDiscReader.ReadFST(fs, h.fstSize);
 
-                    //foreach (var x in fst.GetAllEntries()) Console.WriteLine($"{x.GetType().Name} {x.Name} (in {x.Parent?.Name})");
+                    var entry = fst.RootEntries.FirstOrDefault(f => f is FSTFile && f.Name == "opening.bnr") as FSTFile;
 
-                    byte[] magicword = new byte[4];
-                    fs.Position = 0x31c2bd00;
-                    while (await fs.ReadAsync(magicword, 0, 4) == 4) {
-                        if (magicword[0] == 'B'
-                            && magicword[1] == 'N'
-                            && magicword[2] == 'R'
-                            && (magicword[3] == '1' || magicword[3] == '2')
-                        ) {
-                            // Found BNR header
-                            byte[] zb = new byte[28];
-                            if (await fs.ReadAsync(zb, 0, zb.Length) != zb.Length || zb.Any(b => b != 0)) {
-                                // Not zero padded
-                            } else {
-                                byte[] imageData = new byte[0x1800];
-                                if (await fs.ReadAsync(imageData, 0, imageData.Length) == imageData.Length) {
-                                    using (var image = new Bitmap(96, 32)) {
-                                        int x = 0;
-                                        int y = 0;
-                                        for (int i = 0; i < imageData.Length; i += 2) {
-                                            int c = (imageData[i] << 8) | imageData[i + 1];
-                                            int blue = (c & 0b11111) * 255 / 31;
-                                            int green = ((c >> 5) & 0b11111) * 255 / 31;
-                                            int red = ((c >> 10) & 0b11111) * 255 / 31;
-                                            int alpha = ((c >> 15) & 1) * 255;
+                    if (entry == null) {
+                        throw new Exception("Could not find opening.bnr");
+                    }
 
-                                            Console.WriteLine($"{x},{y} {red} {green} {blue} / {Convert.ToString(c, 2)}");
-
-                                            image.SetPixel(x++, y, Color.FromArgb(alpha, red, green, blue));
-                                            if (x % 4 == 0) {
-                                                y++;
-                                                x -= 4;
-                                                if (y % 4 == 0) {
-                                                    y -= 4;
-                                                    x += 4;
-                                                    if (x == image.Width) {
-                                                        y += 4;
-                                                        x = 0;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        image.Save("C:/Users/admin/Desktop/out.png");
-                                        return;
+                    byte[] opening_bnr = new byte[entry.Length];
+                    fs.Position = entry.FileOffset;
+                    await fs.ReadAsync(opening_bnr, 0, opening_bnr.Length);
+                    
+                    byte[] imageData = new byte[0x1800];
+                    Array.Copy(opening_bnr, 0x20, imageData, 0, 0x1800);
+                    using (var image = new Bitmap(96, 32)) {
+                        int x = 0;
+                        int y = 0;
+                        for (int i = 0; i < imageData.Length; i += 2) {
+                            int c = (imageData[i] << 8) | imageData[i + 1];
+                            int blue = (c & 0b11111) * 255 / 31;
+                            int green = ((c >> 5) & 0b11111) * 255 / 31;
+                            int red = ((c >> 10) & 0b11111) * 255 / 31;
+                            int alpha = ((c >> 15) & 1) * 255;
+                            
+                            image.SetPixel(x++, y, Color.FromArgb(alpha, red, green, blue));
+                            if (x % 4 == 0) {
+                                y++;
+                                x -= 4;
+                                if (y % 4 == 0) {
+                                    y -= 4;
+                                    x += 4;
+                                    if (x == image.Width) {
+                                        y += 4;
+                                        x = 0;
                                     }
                                 }
                             }
                         }
+                        image.Save("C:/Users/admin/Desktop/out.png");
+                        return;
                     }
                 }
             } catch (Exception ex) {
