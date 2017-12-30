@@ -341,5 +341,76 @@ THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMP
 Be.HexEditor © 2011 Bernhard Elbl
 https://sourceforge.net/projects/hexbox/");
         }
+
+        private static int SearchBytes(byte[] haystack, byte[] needle) {
+            var len = needle.Length;
+            var limit = haystack.Length - len;
+            for (var i = 0; i <= limit; i++) {
+                var k = 0;
+                for (; k < len; k++) {
+                    if (needle[k] != haystack[i + k]) break;
+                }
+                if (k == len) return i;
+            }
+            return -1;
+        }
+
+        private async void exportGameCubeBannerImageToolStripMenuItem_Click(object sender, EventArgs e) {
+            try {
+                string path = await FindISOPath();
+                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 1048576)) {
+                    byte[] magicword = new byte[4];
+                    fs.Position = 0x31c2bd00;
+                    while (await fs.ReadAsync(magicword, 0, 4) == 4) {
+                        if (magicword[0] == 'B'
+                            && magicword[1] == 'N'
+                            && magicword[2] == 'R'
+                            && (magicword[3] == '1' || magicword[3] == '2')
+                        ) {
+                            // Found BNR header
+                            byte[] zb = new byte[28];
+                            if (await fs.ReadAsync(zb, 0, zb.Length) != zb.Length || zb.Any(b => b != 0)) {
+                                // Not zero padded
+                            } else {
+                                byte[] imageData = new byte[0x1800];
+                                if (await fs.ReadAsync(imageData, 0, imageData.Length) == imageData.Length) {
+                                    using (var image = new Bitmap(96, 32)) {
+                                        int x = 0;
+                                        int y = 0;
+                                        for (int i = 0; i < imageData.Length; i += 2) {
+                                            int c = (imageData[i] << 8) | imageData[i + 1];
+                                            int blue = (c & 0b11111) * 255 / 31;
+                                            int green = ((c >> 5) & 0b11111) * 255 / 31;
+                                            int red = ((c >> 10) & 0b11111) * 255 / 31;
+                                            int alpha = ((c >> 15) & 1) * 255;
+
+                                            Console.WriteLine($"{x},{y} {red} {green} {blue} / {Convert.ToString(c, 2)}");
+
+                                            image.SetPixel(x++, y, Color.FromArgb(alpha, red, green, blue));
+                                            if (x % 4 == 0) {
+                                                y++;
+                                                x -= 4;
+                                                if (y % 4 == 0) {
+                                                    y -= 4;
+                                                    x += 4;
+                                                    if (x == image.Width) {
+                                                        y += 4;
+                                                        x = 0;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        image.Save("C:/Users/admin/Desktop/out.png");
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (Exception ex) {
+                MessageBox.Show(this, $"Could not export GameCube banner image due to an unknown error. ({ex.GetType().Name}: {ex.Message})");
+            }
+        }
     }
 }
