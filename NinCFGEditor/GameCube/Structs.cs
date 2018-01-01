@@ -143,5 +143,11 @@ namespace NinCFGEditor.GameCube {
                 fixed (sbyte* ptr = developer_long) return new string(ptr);
             }
         }
+
+        public string Description {
+            get {
+                fixed (sbyte* ptr = description) return new string(ptr);
+            }
+        }
     }
 }

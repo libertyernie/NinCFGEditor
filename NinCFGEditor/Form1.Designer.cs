@@ -63,7 +63,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblGameIDAuto = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.exportMetaxmlAndIconpngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportMetaxmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportAllFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxPads)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVideoScale)).BeginInit();
@@ -136,16 +137,18 @@
             // 
             this.gamespecificMetaxmlToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importMetaxmlToolStripMenuItem,
-            this.exportMetaxmlAndIconpngToolStripMenuItem});
+            this.exportMetaxmlToolStripMenuItem,
+            this.exportAllFilesToolStripMenuItem});
             this.gamespecificMetaxmlToolStripMenuItem.Name = "gamespecificMetaxmlToolStripMenuItem";
             this.gamespecificMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-            this.gamespecificMetaxmlToolStripMenuItem.Text = "Game-specific meta.xml";
+            this.gamespecificMetaxmlToolStripMenuItem.Text = "Homebrew Channel";
             // 
             // importMetaxmlToolStripMenuItem
             // 
             this.importMetaxmlToolStripMenuItem.Name = "importMetaxmlToolStripMenuItem";
-            this.importMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.importMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.importMetaxmlToolStripMenuItem.Text = "Import meta.xml";
+            this.importMetaxmlToolStripMenuItem.Click += new System.EventHandler(this.importMetaxmlToolStripMenuItem_Click);
             // 
             // exportGameCubeBannerImageToolStripMenuItem
             // 
@@ -500,12 +503,18 @@
             this.panel1.Size = new System.Drawing.Size(378, 522);
             this.panel1.TabIndex = 0;
             // 
-            // exportMetaxmlAndIconpngToolStripMenuItem
+            // exportMetaxmlToolStripMenuItem
             // 
-            this.exportMetaxmlAndIconpngToolStripMenuItem.Name = "exportMetaxmlAndIconpngToolStripMenuItem";
-            this.exportMetaxmlAndIconpngToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
-            this.exportMetaxmlAndIconpngToolStripMenuItem.Text = "Export meta.xml and icon.png";
-            this.exportMetaxmlAndIconpngToolStripMenuItem.Click += new System.EventHandler(this.exportMetaxmlAndIconpngToolStripMenuItem_Click);
+            this.exportMetaxmlToolStripMenuItem.Name = "exportMetaxmlToolStripMenuItem";
+            this.exportMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.exportMetaxmlToolStripMenuItem.Text = "Export meta.xml";
+            this.exportMetaxmlToolStripMenuItem.Click += new System.EventHandler(this.exportMetaxmlToolStripMenuItem_Click);
+            // 
+            // exportAllFilesToolStripMenuItem
+            // 
+            this.exportAllFilesToolStripMenuItem.Name = "exportAllFilesToolStripMenuItem";
+            this.exportAllFilesToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.exportAllFilesToolStripMenuItem.Text = "Export all files";
             // 
             // Form1
             // 
@@ -574,7 +583,8 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportGameCubeBannerImageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportMetaxmlAndIconpngToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportMetaxmlToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportAllFilesToolStripMenuItem;
     }
 }
 

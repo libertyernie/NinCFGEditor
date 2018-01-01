@@ -58,6 +58,7 @@
     </Compile>
     <Compile Include="GameCube\Classes.cs" />
     <Compile Include="GameCube\Structs.cs" />
+    <Compile Include="MetaXml.cs" />
     <Compile Include="NinCFGFlags.cs" />
     <Compile Include="NinCFGLanguage.cs" />
     <Compile Include="NinCFGVideoMode.cs" />

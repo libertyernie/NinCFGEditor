@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace NinCFGEditor {
     public partial class Form1 : Form {
@@ -391,14 +392,70 @@ https://sourceforge.net/projects/hexbox/");
             }
         }
 
-        private async void exportMetaxmlAndIconpngToolStripMenuItem_Click(object sender, EventArgs e) {
-            try {
-                var bnr = await ExportGameCubeBanner();
+        private static string XmlEscape(string str) {
+            return str?.Replace("&", "&amp;")?.Replace("<", "&lt;")?.Replace(">", "&gt;");
+        }
 
-                MessageBox.Show(this, bnr.GameLong, bnr.GameShort);
-                MessageBox.Show(this, bnr.DeveloperLong, bnr.DeveloperShort);
+        private string GetMetaXml(BNR? bnr) {
+            /*return string.Format(@"<?xml version=""1.0"" encoding=""ISO-8859-1"" standalone=""yes""?>
+<app version=""1"">
+    <name>{0}</name>
+    <coder>{1}</coder>
+    <short_description></short_description>
+    <long_description>{2}</long_description>
+    <no_ios_reload/>
+    <ahb_access/>
+    <arguments>
+        <arg>{3}</arg>
+    </arguments>
+</app>
+", XmlEscape(bnr?.GameLong), XmlEscape(bnr?.DeveloperLong), XmlEscape(bnr?.Description), Convert.ToBase64String(_workingData.GetBytes()));*/
+
+            using (var sw = new StringWriter()) {
+                new XmlSerializer(typeof(MetaXml)).Serialize(sw, new MetaXml {
+                    Version = 1,
+                    Name = bnr?.GameLong,
+                    Coder = bnr?.DeveloperLong,
+                    ShortDescription = "",
+                    LongDescription = bnr?.Description,
+                    NoIosReload = true,
+                    AhbAccess = true,
+                    Arguments = new [] { Convert.ToBase64String(_workingData.GetBytes()) }
+                });
+                return sw.ToString();
+            }
+        }
+
+        private void importMetaxmlToolStripMenuItem_Click(object sender, EventArgs e) {
+            using (var dialog = new OpenFileDialog()) {
+                dialog.Filter = "Homebrew Channel meta.xml files (*.xml)|*.xml";
+                if (dialog.ShowDialog(this) == DialogResult.OK) {
+                    using (var fs = new FileStream(dialog.FileName, FileMode.Open, FileAccess.Read)) {
+                        MetaXml xml = new XmlSerializer(typeof(MetaXml)).Deserialize(fs) as MetaXml;
+                        string base64 = xml?.Arguments?.FirstOrDefault();
+                        if (base64 == null) {
+                            throw new Exception("Could not find a base-64-encoded nincfg.dat in the first argument in meta.xml.");
+                        }
+                        _originalData = NIN_CFG.Read(Convert.FromBase64String(base64));
+                        Populate();
+                    }
+                }
+            }
+        }
+
+        private async void exportMetaxmlToolStripMenuItem_Click(object sender, EventArgs e) {
+            BNR? bnr = null;
+            try {
+                bnr = await ExportGameCubeBanner();
             } catch (Exception ex) {
                 MessageBox.Show(this, $"Could not export GameCube banner image due to an unknown error. ({ex.GetType().Name}: {ex.Message})", Text);
+            }
+
+            using (var dialog = new SaveFileDialog()) {
+                dialog.Filter = "Homebrew Channel meta.xml files (*.xml)|*.xml";
+                if (dialog.ShowDialog(this) == DialogResult.OK) {
+                    File.WriteAllText(dialog.FileName, GetMetaXml(bnr));
+                }
             }
         }
     }
