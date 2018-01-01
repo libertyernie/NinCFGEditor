@@ -4,8 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -397,32 +399,18 @@ https://sourceforge.net/projects/hexbox/");
         }
 
         private string GetMetaXml(BNR? bnr) {
-            /*return string.Format(@"<?xml version=""1.0"" encoding=""ISO-8859-1"" standalone=""yes""?>
-<app version=""1"">
-    <name>{0}</name>
-    <coder>{1}</coder>
-    <short_description></short_description>
-    <long_description>{2}</long_description>
-    <no_ios_reload/>
-    <ahb_access/>
-    <arguments>
-        <arg>{3}</arg>
-    </arguments>
-</app>
-", XmlEscape(bnr?.GameLong), XmlEscape(bnr?.DeveloperLong), XmlEscape(bnr?.Description), Convert.ToBase64String(_workingData.GetBytes()));*/
-
-            using (var sw = new StringWriter()) {
-                new XmlSerializer(typeof(MetaXml)).Serialize(sw, new MetaXml {
+            using (var ms = new MemoryStream()) {
+                new XmlSerializer(typeof(MetaXml)).Serialize(ms, new MetaXml {
                     Version = 1,
                     Name = bnr?.GameLong,
                     Coder = bnr?.DeveloperLong,
-                    ShortDescription = "",
+                    ShortDescription = " ",
                     LongDescription = bnr?.Description,
                     NoIosReload = true,
                     AhbAccess = true,
                     Arguments = new [] { Convert.ToBase64String(_workingData.GetBytes()) }
                 });
-                return sw.ToString();
+                return Encoding.UTF8.GetString(ms.ToArray());
             }
         }
 
@@ -448,13 +436,56 @@ https://sourceforge.net/projects/hexbox/");
             try {
                 bnr = await ExportGameCubeBanner();
             } catch (Exception ex) {
-                MessageBox.Show(this, $"Could not export GameCube banner image due to an unknown error. ({ex.GetType().Name}: {ex.Message})", Text);
+                MessageBox.Show(this, $"Could not export GameCube banner data due to an unknown error. ({ex.GetType().Name}: {ex.Message})", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             using (var dialog = new SaveFileDialog()) {
                 dialog.Filter = "Homebrew Channel meta.xml files (*.xml)|*.xml";
                 if (dialog.ShowDialog(this) == DialogResult.OK) {
                     File.WriteAllText(dialog.FileName, GetMetaXml(bnr));
+                }
+            }
+        }
+
+        public void AskToWriteFile(string src, string dest) {
+            AskToWriteFile(File.ReadAllBytes(src), dest);
+        }
+
+        public void AskToWriteFile(byte[] data, string dest) {
+            if (!File.Exists(dest) || DialogResult.Yes == MessageBox.Show(this, $"{Path.GetFileName(dest)} already exists - overwrite?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question)) {
+                File.WriteAllBytes(dest, data);
+            }
+        }
+
+        private async void exportAllFilesToolStripMenuItem_Click(object sender, EventArgs e) {
+            BNR? bnr = null;
+            try {
+                bnr = await ExportGameCubeBanner();
+            } catch (Exception ex) {
+                MessageBox.Show(this, $"Could not export GameCube banner data due to an unknown error. ({ex.GetType().Name}: {ex.Message})", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            using (var dialog = new FolderBrowserDialog()) {
+                if (dialog.ShowDialog(this) == DialogResult.OK) {
+                    if (File.Exists("boot.dol")) {
+                        AskToWriteFile("boot.dol", Path.Combine(dialog.SelectedPath, "boot.dol"));
+                    } else {
+                        MessageBox.Show(this, "Could not find Nintendont boot.dol - this file won't be copied.", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    string xml = GetMetaXml(bnr);
+                    AskToWriteFile(Encoding.UTF8.GetBytes(xml), Path.Combine(dialog.SelectedPath, "meta.xml"));
+
+                    if (bnr != null) {
+                        using (var ms = new MemoryStream())
+                        using (var image1 = bnr.Value.GetImage())
+                        using (var image2 = new Bitmap(128, 48))
+                        using (var g = Graphics.FromImage(image2)) {
+                            g.DrawImage(image1, 16, 8);
+                            image2.Save(ms, ImageFormat.Png);
+                            AskToWriteFile(ms.ToArray(), Path.Combine(dialog.SelectedPath, "icon.png"));
+                        }
+                    }
                 }
             }
         }

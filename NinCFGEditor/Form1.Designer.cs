@@ -32,6 +32,8 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gamespecificMetaxmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importMetaxmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportMetaxmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportAllFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportGameCubeBannerImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,8 +65,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblGameIDAuto = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.exportMetaxmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportAllFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxPads)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVideoScale)).BeginInit();
@@ -149,6 +149,20 @@
             this.importMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.importMetaxmlToolStripMenuItem.Text = "Import meta.xml";
             this.importMetaxmlToolStripMenuItem.Click += new System.EventHandler(this.importMetaxmlToolStripMenuItem_Click);
+            // 
+            // exportMetaxmlToolStripMenuItem
+            // 
+            this.exportMetaxmlToolStripMenuItem.Name = "exportMetaxmlToolStripMenuItem";
+            this.exportMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.exportMetaxmlToolStripMenuItem.Text = "Export meta.xml";
+            this.exportMetaxmlToolStripMenuItem.Click += new System.EventHandler(this.exportMetaxmlToolStripMenuItem_Click);
+            // 
+            // exportAllFilesToolStripMenuItem
+            // 
+            this.exportAllFilesToolStripMenuItem.Name = "exportAllFilesToolStripMenuItem";
+            this.exportAllFilesToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.exportAllFilesToolStripMenuItem.Text = "Export all files";
+            this.exportAllFilesToolStripMenuItem.Click += new System.EventHandler(this.exportAllFilesToolStripMenuItem_Click);
             // 
             // exportGameCubeBannerImageToolStripMenuItem
             // 
@@ -502,19 +516,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(378, 522);
             this.panel1.TabIndex = 0;
-            // 
-            // exportMetaxmlToolStripMenuItem
-            // 
-            this.exportMetaxmlToolStripMenuItem.Name = "exportMetaxmlToolStripMenuItem";
-            this.exportMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.exportMetaxmlToolStripMenuItem.Text = "Export meta.xml";
-            this.exportMetaxmlToolStripMenuItem.Click += new System.EventHandler(this.exportMetaxmlToolStripMenuItem_Click);
-            // 
-            // exportAllFilesToolStripMenuItem
-            // 
-            this.exportAllFilesToolStripMenuItem.Name = "exportAllFilesToolStripMenuItem";
-            this.exportAllFilesToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.exportAllFilesToolStripMenuItem.Text = "Export all files";
             // 
             // Form1
             // 
