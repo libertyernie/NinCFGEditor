@@ -328,7 +328,7 @@ To insert a coin, move the C stick in any direction.",
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
             MessageBox.Show(this, @"nincfg.bin editor
-© 2017 libertyernie
+© 2017-2018 libertyernie
 https://github.com/libertyernie/NinCFGEditor
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ""Software""), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and / or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -357,54 +357,34 @@ https://sourceforge.net/projects/hexbox/");
         private async void exportGameCubeBannerImageToolStripMenuItem_Click(object sender, EventArgs e) {
             try {
                 string path = await FindISOPath();
+                if (path == null) {
+                    MessageBox.Show(this, "The GameCube disc image could not be found on any attached drives. Make sure the path is correct.", Text);
+                    return;
+                }
                 using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 1048576)) {
-                    var h = await GameCubeDiscReader.ReadGameCubeDiscHeaderAsync(fs);
+                    var h = await fs.ReadGameCubeDiscHeaderAsync();
+
+                    if (h.header.gcnMagicWord != 0xc2339f3d) {
+                        throw new Exception("This does not look like a GameCube disc.");
+                    }
 
                     fs.Position = h.fstOffset;
-                    var fst = await GameCubeDiscReader.ReadFST(fs, h.fstSize);
+                    var fst = await fs.ReadFSTAsync(h.fstSize);
 
                     var entry = fst.RootEntries.FirstOrDefault(f => f is FSTFile && f.Name == "opening.bnr") as FSTFile;
 
                     if (entry == null) {
-                        throw new Exception("Could not find opening.bnr");
+                        throw new Exception("Could not find opening.bnr.");
                     }
-
-                    byte[] opening_bnr = new byte[entry.Length];
-                    fs.Position = entry.FileOffset;
-                    await fs.ReadAsync(opening_bnr, 0, opening_bnr.Length);
                     
-                    byte[] imageData = new byte[0x1800];
-                    Array.Copy(opening_bnr, 0x20, imageData, 0, 0x1800);
-                    using (var image = new Bitmap(96, 32)) {
-                        int x = 0;
-                        int y = 0;
-                        for (int i = 0; i < imageData.Length; i += 2) {
-                            int c = (imageData[i] << 8) | imageData[i + 1];
-                            int blue = (c & 0b11111) * 255 / 31;
-                            int green = ((c >> 5) & 0b11111) * 255 / 31;
-                            int red = ((c >> 10) & 0b11111) * 255 / 31;
-                            int alpha = ((c >> 15) & 1) * 255;
-                            
-                            image.SetPixel(x++, y, Color.FromArgb(alpha, red, green, blue));
-                            if (x % 4 == 0) {
-                                y++;
-                                x -= 4;
-                                if (y % 4 == 0) {
-                                    y -= 4;
-                                    x += 4;
-                                    if (x == image.Width) {
-                                        y += 4;
-                                        x = 0;
-                                    }
-                                }
-                            }
-                        }
-                        image.Save("C:/Users/admin/Desktop/out.png");
-                        return;
-                    }
+                    fs.Position = entry.FileOffset;
+                    var bnr = await fs.ReadBNRAsync();
+
+                    var image = bnr.GetImage();
+                    image.Save("C:/Users/admin/Desktop/out.png");
                 }
             } catch (Exception ex) {
-                MessageBox.Show(this, $"Could not export GameCube banner image due to an unknown error. ({ex.GetType().Name}: {ex.Message})");
+                MessageBox.Show(this, $"Could not export GameCube banner image due to an unknown error. ({ex.GetType().Name}: {ex.Message})", Text);
             }
         }
     }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NinCFGEditor.GameCube {
@@ -17,12 +16,27 @@ namespace NinCFGEditor.GameCube {
             return GameCubeDiscHeader.FromByteArray(buffer);
         }
 
-        public static async Task<FST> ReadFST(this Stream stream, int size) {
+        public static async Task<FST> ReadFSTAsync(this Stream stream, int size) {
             byte[] buffer = new byte[size];
             if (await stream.ReadAsync(buffer, 0, size) < size) {
                 throw new Exception("Not enough data");
             }
             return new FST(buffer);
+        }
+
+        public static async Task<BNR> ReadBNRAsync(this Stream stream) {
+            int size = 6496;
+            byte[] buffer = new byte[size];
+            if (await stream.ReadAsync(buffer, 0, size) < size) {
+                throw new Exception("Not enough data");
+            }
+            return ReadBNR(buffer);
+        }
+
+        private static unsafe BNR ReadBNR(byte[] data) {
+            fixed (byte* ptr = data) {
+                return *(BNR*)ptr;
+            }
         }
     }
 

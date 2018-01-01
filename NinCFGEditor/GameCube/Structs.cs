@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -8,23 +10,23 @@ using System.Threading.Tasks;
 
 namespace NinCFGEditor.GameCube {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public unsafe struct DiscHeader {
-        public sbyte _discId;
-        public fixed sbyte _gameCode[2];
-        public sbyte _regionCode;
-        public fixed sbyte _makerCode[2];
-        public byte _discNumber;
-        byte _discVersion;
-        public byte _audioStreaming;
-        public byte _streamingBufferSize;
-        public fixed byte _unused[14];
-        public bint _wiiMagicWord;
-        public bint _gcnMagicWord;
-        public fixed sbyte _gameTitle[64];
+    public unsafe struct NintendoDiscHeader {
+        public sbyte discId;
+        public fixed sbyte gameCode[2];
+        public sbyte regionCode;
+        public fixed sbyte makerCode[2];
+        public byte discNumber;
+        byte discVersion;
+        public byte audioStreaming;
+        public byte streamingBufferSize;
+        public fixed byte unused[14];
+        public buint wiiMagicWord;
+        public buint gcnMagicWord;
+        public fixed sbyte gameTitle[64];
 
         public string GameID {
             get {
-                fixed (sbyte* ptr = &_discId) {
+                fixed (sbyte* ptr = &discId) {
                     return new string(ptr);
                 }
             }
@@ -34,7 +36,7 @@ namespace NinCFGEditor.GameCube {
     [StructLayout(LayoutKind.Explicit, Pack = 1, Size = 0x440)]
     public unsafe struct GameCubeDiscHeader {
         [FieldOffset(0)]
-        public DiscHeader header;
+        public NintendoDiscHeader header;
         [FieldOffset(0x420)]
         public bint dolOffset;
         [FieldOffset(0x424)]
@@ -56,9 +58,6 @@ namespace NinCFGEditor.GameCube {
 
     [StructLayout(LayoutKind.Explicit, Pack = 1)]
     public unsafe struct FSTHeader {
-        [FieldOffset(0)]
-        private FSTEntry _rootEntry;
-
         [FieldOffset(8)]
         public bint numEntries;
     }
@@ -80,5 +79,45 @@ namespace NinCFGEditor.GameCube {
         public bint parentOffset;
         [FieldOffset(8)]
         public buint fileLength;
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public unsafe struct BNR {
+        public fixed sbyte tag[4];
+        public fixed byte padding[28];
+        private fixed byte _imageData[6144];
+        public fixed sbyte game_short[32];
+        public fixed sbyte developer_short[32];
+        public fixed sbyte game_long[64];
+        public fixed sbyte developer_long[64];
+        public fixed sbyte description[128];
+
+        public bushort* imageData {
+            get {
+                fixed (byte* ptr = _imageData) return (bushort*)ptr;
+            }
+        }
+
+        public Bitmap GetImage() {
+            var b = new Bitmap(96, 32, PixelFormat.Format16bppArgb1555);
+            BitmapData data = b.LockBits(new Rectangle(0, 0, 96, 32), ImageLockMode.ReadWrite, PixelFormat.Format16bppArgb1555);
+
+            bushort* pixels = imageData;
+            for (int colblock = 0; colblock < 8; colblock++) {
+                ushort* row0 = (ushort*)data.Scan0 + 384 * colblock;
+                ushort* row1 = row0 + 96;
+                ushort* row2 = row1 + 96;
+                ushort* row3 = row2 + 96;
+                for (int rowblock = 0; rowblock < 24; rowblock++) {
+                    for (int i = 0; i < 4; i++) *row0++ = *pixels++;
+                    for (int i = 0; i < 4; i++) *row1++ = *pixels++;
+                    for (int i = 0; i < 4; i++) *row2++ = *pixels++;
+                    for (int i = 0; i < 4; i++) *row3++ = *pixels++;
+                }
+            }
+
+            b.UnlockBits(data);
+            return b;
+        }
     }
 }
