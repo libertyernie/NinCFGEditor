@@ -354,35 +354,49 @@ https://sourceforge.net/projects/hexbox/");
             return -1;
         }
 
+        private async Task<BNR> ExportGameCubeBanner() {
+            string path = await FindISOPath();
+            if (path == null) {
+                throw new Exception("The GameCube disc image could not be found on any attached drives. Make sure the path is correct.");
+            }
+            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 1048576)) {
+                var h = await fs.ReadGameCubeDiscHeaderAsync();
+
+                if (h.header.gcnMagicWord != 0xc2339f3d) {
+                    throw new Exception("This does not look like a GameCube disc.");
+                }
+
+                fs.Position = h.fstOffset;
+                var fst = await fs.ReadFSTAsync(h.fstSize);
+
+                var entry = fst.RootEntries.FirstOrDefault(f => f is FSTFile && f.Name == "opening.bnr") as FSTFile;
+
+                if (entry == null) {
+                    throw new Exception("Could not find opening.bnr.");
+                }
+
+                fs.Position = entry.FileOffset;
+                return await fs.ReadBNRAsync();
+            }
+        }
+
         private async void exportGameCubeBannerImageToolStripMenuItem_Click(object sender, EventArgs e) {
             try {
-                string path = await FindISOPath();
-                if (path == null) {
-                    MessageBox.Show(this, "The GameCube disc image could not be found on any attached drives. Make sure the path is correct.", Text);
-                    return;
-                }
-                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 1048576)) {
-                    var h = await fs.ReadGameCubeDiscHeaderAsync();
+                var bnr = await ExportGameCubeBanner();
 
-                    if (h.header.gcnMagicWord != 0xc2339f3d) {
-                        throw new Exception("This does not look like a GameCube disc.");
-                    }
+                var image = bnr.GetImage();
+                image.Save("C:/Users/admin/Desktop/out.png");
+            } catch (Exception ex) {
+                MessageBox.Show(this, $"Could not export GameCube banner image due to an unknown error. ({ex.GetType().Name}: {ex.Message})", Text);
+            }
+        }
 
-                    fs.Position = h.fstOffset;
-                    var fst = await fs.ReadFSTAsync(h.fstSize);
+        private async void exportMetaxmlAndIconpngToolStripMenuItem_Click(object sender, EventArgs e) {
+            try {
+                var bnr = await ExportGameCubeBanner();
 
-                    var entry = fst.RootEntries.FirstOrDefault(f => f is FSTFile && f.Name == "opening.bnr") as FSTFile;
-
-                    if (entry == null) {
-                        throw new Exception("Could not find opening.bnr.");
-                    }
-                    
-                    fs.Position = entry.FileOffset;
-                    var bnr = await fs.ReadBNRAsync();
-
-                    var image = bnr.GetImage();
-                    image.Save("C:/Users/admin/Desktop/out.png");
-                }
+                MessageBox.Show(this, bnr.GameLong, bnr.GameShort);
+                MessageBox.Show(this, bnr.DeveloperLong, bnr.DeveloperShort);
             } catch (Exception ex) {
                 MessageBox.Show(this, $"Could not export GameCube banner image due to an unknown error. ({ex.GetType().Name}: {ex.Message})", Text);
             }

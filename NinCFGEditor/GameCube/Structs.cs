@@ -119,5 +119,29 @@ namespace NinCFGEditor.GameCube {
             b.UnlockBits(data);
             return b;
         }
+
+        public string GameShort {
+            get {
+                fixed (sbyte* ptr = game_short) return new string(ptr);
+            }
+        }
+
+        public string GameLong {
+            get {
+                fixed (sbyte* ptr = game_long) return new string(ptr);
+            }
+        }
+
+        public string DeveloperShort {
+            get {
+                fixed (sbyte* ptr = developer_short) return new string(ptr);
+            }
+        }
+
+        public string DeveloperLong {
+            get {
+                fixed (sbyte* ptr = developer_long) return new string(ptr);
+            }
+        }
     }
 }

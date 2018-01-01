@@ -32,8 +32,7 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gamespecificMetaxmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importMetaxmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportMetaxmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportIconpngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportGameCubeBannerImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -64,7 +63,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblGameIDAuto = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.exportGameCubeBannerImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportMetaxmlAndIconpngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numMaxPads)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVideoScale)).BeginInit();
@@ -137,29 +136,23 @@
             // 
             this.gamespecificMetaxmlToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importMetaxmlToolStripMenuItem,
-            this.exportMetaxmlToolStripMenuItem,
-            this.exportIconpngToolStripMenuItem});
+            this.exportMetaxmlAndIconpngToolStripMenuItem});
             this.gamespecificMetaxmlToolStripMenuItem.Name = "gamespecificMetaxmlToolStripMenuItem";
-            this.gamespecificMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.gamespecificMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
             this.gamespecificMetaxmlToolStripMenuItem.Text = "Game-specific meta.xml";
             // 
             // importMetaxmlToolStripMenuItem
             // 
             this.importMetaxmlToolStripMenuItem.Name = "importMetaxmlToolStripMenuItem";
-            this.importMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.importMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
             this.importMetaxmlToolStripMenuItem.Text = "Import meta.xml";
             // 
-            // exportMetaxmlToolStripMenuItem
+            // exportGameCubeBannerImageToolStripMenuItem
             // 
-            this.exportMetaxmlToolStripMenuItem.Name = "exportMetaxmlToolStripMenuItem";
-            this.exportMetaxmlToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.exportMetaxmlToolStripMenuItem.Text = "Export meta.xml";
-            // 
-            // exportIconpngToolStripMenuItem
-            // 
-            this.exportIconpngToolStripMenuItem.Name = "exportIconpngToolStripMenuItem";
-            this.exportIconpngToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.exportIconpngToolStripMenuItem.Text = "Export icon.png";
+            this.exportGameCubeBannerImageToolStripMenuItem.Name = "exportGameCubeBannerImageToolStripMenuItem";
+            this.exportGameCubeBannerImageToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.exportGameCubeBannerImageToolStripMenuItem.Text = "Export GameCube banner image";
+            this.exportGameCubeBannerImageToolStripMenuItem.Click += new System.EventHandler(this.exportGameCubeBannerImageToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -507,12 +500,12 @@
             this.panel1.Size = new System.Drawing.Size(378, 522);
             this.panel1.TabIndex = 0;
             // 
-            // exportGameCubeBannerImageToolStripMenuItem
+            // exportMetaxmlAndIconpngToolStripMenuItem
             // 
-            this.exportGameCubeBannerImageToolStripMenuItem.Name = "exportGameCubeBannerImageToolStripMenuItem";
-            this.exportGameCubeBannerImageToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-            this.exportGameCubeBannerImageToolStripMenuItem.Text = "Export GameCube banner image";
-            this.exportGameCubeBannerImageToolStripMenuItem.Click += new System.EventHandler(this.exportGameCubeBannerImageToolStripMenuItem_Click);
+            this.exportMetaxmlAndIconpngToolStripMenuItem.Name = "exportMetaxmlAndIconpngToolStripMenuItem";
+            this.exportMetaxmlAndIconpngToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.exportMetaxmlAndIconpngToolStripMenuItem.Text = "Export meta.xml and icon.png";
+            this.exportMetaxmlAndIconpngToolStripMenuItem.Click += new System.EventHandler(this.exportMetaxmlAndIconpngToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -578,11 +571,10 @@
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gamespecificMetaxmlToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importMetaxmlToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportMetaxmlToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportIconpngToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportGameCubeBannerImageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportMetaxmlAndIconpngToolStripMenuItem;
     }
 }
 
