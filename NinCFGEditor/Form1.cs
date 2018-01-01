@@ -399,6 +399,13 @@ https://sourceforge.net/projects/hexbox/");
         }
 
         private string GetMetaXml(BNR? bnr) {
+            if ((_workingData.Flags & NinCFGFlags.Auto_Boot) == 0) {
+                var r = MessageBox.Show(this, "Auto Boot is off. Would you like to turn it on?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (r == DialogResult.Yes) {
+                    _checkboxes[NinCFGFlags.Auto_Boot].Checked = true;
+                }
+            }
+
             using (var ms = new MemoryStream()) {
                 new XmlSerializer(typeof(MetaXml)).Serialize(ms, new MetaXml {
                     Version = 1,
