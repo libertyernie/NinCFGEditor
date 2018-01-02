@@ -71,6 +71,10 @@ To insert a coin, move the C stick in any direction.",
                 flowLayoutPanel1.Controls.Add(box);
                 _checkboxes.Add(v, box);
 
+                if (v == NinCFGFlags.Cheat_Path) {
+                    box.CheckedChanged += (s, e) => txtCheatPath.Enabled = btnCheatPathBrowse.Enabled = box.Checked;
+                }
+
                 if (_flagDescriptions.TryGetValue(v, out string desc)) {
                     flowLayoutPanel1.Controls.Add(new Label {
                         Text = desc,
