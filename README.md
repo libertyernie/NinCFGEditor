@@ -2,7 +2,7 @@ nincfg.bin editor
 -----------------
 
 This is a Windows application that lets you create or edit nincfg.bin files
-used by [https://github.com/FIX94/Nintendont](Nintendont). It can be used to
+used by [Nintendont](https://github.com/FIX94/Nintendont). It can be used to
 view or edit nincfg.bin files from your computer.
 
 Custom Homebrew Channel entries
@@ -13,7 +13,7 @@ nincfg.bin to be stored in the Homebrew Channel's meta.xml file. This lets me
 have a separate entry in the Homebrew Channel for each GameCube game I want to
 play. NinCFGEditor can help you make these custom Homebrew Channel entries.
 
-1. Put the custom Nintendont boot.dol in the same folder as NinCFGEditor.exe (https://github.com/libertyernie/Nintendont/raw/custom-build/loader/loader.dol)
+1. Put my custom Nintendont boot.dol https://github.com/libertyernie/Nintendont/raw/custom-build/loader/loader.dol) in the same folder as NinCFGEditor.exe, and name it boot.dol
 
 2. Copy the GameCube game to your SD/USB drive (see other tutorials for how to do this)
 
