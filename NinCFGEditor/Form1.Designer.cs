@@ -321,7 +321,6 @@
             // 
             // numMaxPads
             // 
-            this.numMaxPads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.numMaxPads.Location = new System.Drawing.Point(243, 57);
             this.numMaxPads.Maximum = new decimal(new int[] {
             4,
