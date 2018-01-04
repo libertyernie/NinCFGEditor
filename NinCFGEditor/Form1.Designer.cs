@@ -61,7 +61,6 @@
             this.numVideoOffset = new System.Windows.Forms.NumericUpDown();
             this.lblVideoOffset = new System.Windows.Forms.Label();
             this.chkPatchPAL50 = new System.Windows.Forms.CheckBox();
-            this.pnlHex = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblGameIDAuto = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -83,7 +82,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(734, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(434, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -196,7 +195,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 78);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(378, 285);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(434, 285);
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -263,14 +262,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtGamePath.Location = new System.Drawing.Point(73, 3);
             this.txtGamePath.Name = "txtGamePath";
-            this.txtGamePath.Size = new System.Drawing.Size(269, 20);
+            this.txtGamePath.Size = new System.Drawing.Size(325, 20);
             this.txtGamePath.TabIndex = 9;
             this.txtGamePath.TextChanged += new System.EventHandler(this.txtGamePath_TextChanged);
             // 
             // btnGamePathBrowse
             // 
             this.btnGamePathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGamePathBrowse.Location = new System.Drawing.Point(348, 3);
+            this.btnGamePathBrowse.Location = new System.Drawing.Point(404, 3);
             this.btnGamePathBrowse.Name = "btnGamePathBrowse";
             this.btnGamePathBrowse.Size = new System.Drawing.Size(24, 20);
             this.btnGamePathBrowse.TabIndex = 10;
@@ -282,7 +281,7 @@
             // 
             this.btnCheatPathBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCheatPathBrowse.Enabled = false;
-            this.btnCheatPathBrowse.Location = new System.Drawing.Point(348, 55);
+            this.btnCheatPathBrowse.Location = new System.Drawing.Point(404, 55);
             this.btnCheatPathBrowse.Name = "btnCheatPathBrowse";
             this.btnCheatPathBrowse.Size = new System.Drawing.Size(24, 20);
             this.btnCheatPathBrowse.TabIndex = 13;
@@ -297,7 +296,7 @@
             this.txtCheatPath.Enabled = false;
             this.txtCheatPath.Location = new System.Drawing.Point(73, 55);
             this.txtCheatPath.Name = "txtCheatPath";
-            this.txtCheatPath.Size = new System.Drawing.Size(269, 20);
+            this.txtCheatPath.Size = new System.Drawing.Size(325, 20);
             this.txtCheatPath.TabIndex = 12;
             this.txtCheatPath.TextChanged += new System.EventHandler(this.txtCheatPath_TextChanged);
             // 
@@ -459,14 +458,6 @@
             this.chkPatchPAL50.UseVisualStyleBackColor = true;
             this.chkPatchPAL50.CheckedChanged += new System.EventHandler(this.chkPatchPAL50_CheckedChanged);
             // 
-            // pnlHex
-            // 
-            this.pnlHex.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlHex.Location = new System.Drawing.Point(378, 24);
-            this.pnlHex.Name = "pnlHex";
-            this.pnlHex.Size = new System.Drawing.Size(356, 522);
-            this.pnlHex.TabIndex = 25;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.lblVideoMode);
@@ -487,7 +478,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 363);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(378, 159);
+            this.panel2.Size = new System.Drawing.Size(434, 159);
             this.panel2.TabIndex = 26;
             // 
             // lblGameIDAuto
@@ -509,7 +500,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(378, 522);
+            this.panel1.Size = new System.Drawing.Size(434, 522);
             this.panel1.TabIndex = 0;
             // 
             // panel3
@@ -526,16 +517,15 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(378, 78);
+            this.panel3.Size = new System.Drawing.Size(434, 78);
             this.panel3.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(734, 546);
+            this.ClientSize = new System.Drawing.Size(434, 546);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.pnlHex);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -588,7 +578,6 @@
         private System.Windows.Forms.Label lblVideoOffset;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.CheckBox chkPatchPAL50;
-        private System.Windows.Forms.Panel pnlHex;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblGameIDAuto;
