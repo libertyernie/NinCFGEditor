@@ -1,5 +1,4 @@
-﻿using Be.Windows.Forms;
-using NinCFGEditor.GameCube;
+﻿using NinCFGEditor.GameCube;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,7 +13,6 @@ using System.Xml.Serialization;
 
 namespace NinCFGEditor {
     public partial class Form1 : Form {
-        private HexBox _hexBox;
         private Dictionary<NinCFGFlags, CheckBox> _checkboxes;
 
         private NIN_CFG _originalData;
@@ -48,12 +46,6 @@ To insert a coin, move the C stick in any direction.",
         public Form1() {
             InitializeComponent();
 
-            _hexBox = new HexBox() {
-                Dock = DockStyle.Fill,
-            };
-            _hexBox.Font = new Font(_hexBox.Font.FontFamily, 8);
-            pnlHex.Controls.Add(_hexBox);
-
             _checkboxes = new Dictionary<NinCFGFlags, CheckBox>();
                 
             foreach (object o in Enum.GetValues(typeof(NinCFGFlags))) {
@@ -70,6 +62,10 @@ To insert a coin, move the C stick in any direction.",
                 };
                 flowLayoutPanel1.Controls.Add(box);
                 _checkboxes.Add(v, box);
+
+                if (v == NinCFGFlags.Cheat_Path) {
+                    box.CheckedChanged += (s, e) => txtCheatPath.Enabled = btnCheatPathBrowse.Enabled = box.Checked;
+                }
 
                 if (_flagDescriptions.TryGetValue(v, out string desc)) {
                     flowLayoutPanel1.Controls.Add(new Label {
@@ -155,9 +151,7 @@ To insert a coin, move the C stick in any direction.",
             numVideoOffset.Value = _workingData.VideoOffset;
         }
 
-        private void UpdateHexBox() {
-            _hexBox.ByteProvider = new ReadOnlyByteProvider(_workingData.GetBytes());
-        }
+        private void UpdateHexBox() { }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e) {
             _originalData = NIN_CFG.Default;

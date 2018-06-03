@@ -14,6 +14,7 @@ namespace NinCFGEditor {
     
     [Flags]
     public enum NinCFGVideoModeLow {
+        None = 0,
         PAL50 = 1 << 0,
         PAL60 = 1 << 1,
         NTSC = 1 << 2,
