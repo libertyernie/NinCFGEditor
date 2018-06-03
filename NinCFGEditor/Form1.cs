@@ -357,6 +357,21 @@ https://sourceforge.net/projects/hexbox/");
             return -1;
         }
 
+        public FSTFile FindFile(IEnumerable<FSTEntryNode> entries, string name) {
+            foreach (var e in entries) {
+                var f = e as FSTFile;
+                if (f != null && f.Name == name) return f;
+            }
+            foreach (var e in entries) {
+                var d = e as FSTDirectory;
+                if (d != null) {
+                    var f = FindFile(d.Children, name);
+                    if (f != null) return f;
+                }
+            }
+            return null;
+        }
+
         private async Task<BNR> ExportGameCubeBanner() {
             string path = await FindISOPath();
             if (path == null) {
@@ -372,7 +387,7 @@ https://sourceforge.net/projects/hexbox/");
                 fs.Position = h.fstOffset;
                 var fst = await fs.ReadFSTAsync(h.fstSize);
 
-                var entry = fst.RootEntries.FirstOrDefault(f => f is FSTFile && f.Name == "opening.bnr") as FSTFile;
+                var entry = FindFile(fst.RootEntries, "opening.bnr");
 
                 if (entry == null) {
                     throw new Exception("Could not find opening.bnr.");
