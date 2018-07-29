@@ -13,7 +13,7 @@ nincfg.bin to be stored in the Homebrew Channel's meta.xml file. This lets me
 have a separate entry in the Homebrew Channel for each GameCube game I want to
 play. NinCFGEditor can help you make these custom Homebrew Channel entries.
 
-1. Put my custom Nintendont boot.dol https://github.com/libertyernie/Nintendont/raw/custom-build/loader/loader.dol) in the same folder as NinCFGEditor.exe, and name it boot.dol
+1. Put my custom Nintendont boot.dol (https://github.com/libertyernie/Nintendont/releases/tag/v20180616) in the same folder as NinCFGEditor.exe, and name it boot.dol
 
 2. Copy the GameCube game to your SD/USB drive (see other tutorials for how to do this)
 
