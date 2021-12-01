@@ -5,6 +5,8 @@ This is a Windows application that lets you create or edit nincfg.bin files
 used by [Nintendont](https://github.com/FIX94/Nintendont). It can be used to
 view or edit nincfg.bin files from your computer.
 
+**I'm working on a replacement for this app** - [Nicoe](https://github.com/libertyernie/Nicoe) should be able to do everything this app can, and should let you open/save version 8, 9, or 10 nincfg.bin files.
+
 Custom Homebrew Channel entries
 -------------------------------
 
